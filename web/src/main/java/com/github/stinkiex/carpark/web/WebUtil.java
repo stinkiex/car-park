@@ -8,7 +8,7 @@ import java.io.IOException;
 public class WebUtil {
     //private static final Logger log = LoggerFactory.getLogger(WebUtil.class);
 
-    public static void forword(String page, HttpServletRequest rq, HttpServletResponse rs) {
+    public static void forward(String page, HttpServletRequest rq, HttpServletResponse rs) {
         try {
             rq.getRequestDispatcher("/" + page + ".jsp").forward(rq, rs);
         } catch (ServletException | IOException e) {
