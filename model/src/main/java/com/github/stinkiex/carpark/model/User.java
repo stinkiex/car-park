@@ -1,11 +1,13 @@
 package com.github.stinkiex.carpark.model;
 
 public class User {
+    private Long id;
     private String firstName;
     private String lastName;
     private String phoneNumber;
 
-    public User(String firstName, String lastName, String phoneNumber) {
+    public User(Long id, String firstName, String lastName, String phoneNumber) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -17,6 +19,10 @@ public class User {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getPhoneNumber() {
