@@ -5,8 +5,14 @@ public class AuthUser {
     private String password;
     private Role role;
     private String userId;
+    private Long id;
 
-    public AuthUser(String login, String password, Role role, String userId) {
+    public Long getId() {
+        return id;
+    }
+
+    public AuthUser(Long id, String login, String password, Role role, String userId) {
+        this.id= id;
         this.login = login;
         this.password = password;
         this.role = role;
