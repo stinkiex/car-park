@@ -6,12 +6,12 @@ public class FlightApplication {
     private String dateBeg;
     private String dateExp;
     private String cargo;
-    private double weight;
+    private int weight;
     private String flightStatus;
     private String car;  //Todo связать с машинами;
     private String driver; //Todo connect with users
 
-    public FlightApplication(long id, String dateBeg, String dateExp, String cargo, double weight, String flightStatus, String car) {
+    public FlightApplication(long id, String dateBeg, String dateExp, String cargo, int weight, String flightStatus, String car, String driver) {
         this.id = id;
         this.dateBeg = dateBeg;
         this.dateExp = dateExp;
@@ -42,7 +42,7 @@ public class FlightApplication {
         return cargo;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 

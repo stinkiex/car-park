@@ -7,7 +7,7 @@ import java.util.List;
 public interface FlightApplicationDao {
     List<FlightApplication> getFlightApplications();
 
-    void save(FlightApplication flightApplication);
+    Long save(FlightApplication flightApplication);
 
     void update(FlightApplication flightApplication);
 

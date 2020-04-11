@@ -21,7 +21,7 @@ public class DefaultCarDao implements CarDao {
     @Override
     public List<Car> getCars() {
         try (Connection connection = DataSource.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from user");
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from car");
              ResultSet resultSet = preparedStatement.executeQuery()){
             final List<Car> result = new ArrayList<>();
             while(resultSet.next()){
@@ -45,10 +45,10 @@ public class DefaultCarDao implements CarDao {
         final String sql = "insert into car(name, model, regnumber, needforrepair) values(?,?,?,?)";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(1, car.getName());
-            ps.setString(2, car.getModel());
-            ps.setString(3, car.getRegNumber());
-            ps.setInt(4, car.getNeedForRepair());
+            ps.setString(2, car.getName());
+            ps.setString(3, car.getModel());
+            ps.setString(4, car.getRegNumber());
+            ps.setInt(5, car.getNeedForRepair());
             ps.executeUpdate();
             try (ResultSet keys = ps.getGeneratedKeys()) {
                 keys.next();
