@@ -4,4 +4,6 @@ import com.github.stinkiex.carpark.model.AuthUser;
 
 public interface SecurityService {
     AuthUser login(String login, String password);
+
+    AuthUser createUser(String login, String pass);
 }

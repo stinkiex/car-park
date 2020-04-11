@@ -5,9 +5,9 @@ public class Car {
     private String name;
     private String model;
     private String regNumber;
-    private String needForRepair;
+    private int needForRepair;
 
-    public Car(Long carId, String name, String model, String regNumber, String needForRepair) {
+    public Car(Long carId, String name, String model, String regNumber, int needForRepair) {
         this.carId = carId;
         this.name = name;
         this.model = model;
@@ -31,7 +31,7 @@ public class Car {
         return regNumber;
     }
 
-    public String getNeedForRepair() {
+    public int getNeedForRepair() {
         return needForRepair;
     }
 }

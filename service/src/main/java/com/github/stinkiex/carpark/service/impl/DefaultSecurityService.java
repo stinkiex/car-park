@@ -46,10 +46,11 @@ public class DefaultSecurityService implements SecurityService {
         return flag;
     }
 
-//    public static void createUser(String login, String password){
-//        if (checkAlreadyExistsUser(login) == false) {
-//            DefaultUserDao defaultUserDao = new DefaultUserDao();
-//            defaultUserDaouserByLogin.putIfAbsent(login, new AuthUser(login, ,password, Role.DRIVER, null));
-//        }
-//    }
+    public AuthUser createUser(String login, String password){
+        if (checkAlreadyExistsUser(login) == false) {
+            AuthUserDao authUserDao = new DefaultAuthUserDao();
+            authUserDao.saveAuthUser(new AuthUser(null, login, password, Role.DRIVER, null));
+        }
+        return null;
+    }
 }

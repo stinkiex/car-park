@@ -1,5 +1,6 @@
 package com.github.stinkiex.carpark.web.servlet;
 
+import com.github.stinkiex.carpark.model.AuthUser;
 import com.github.stinkiex.carpark.service.SecurityService;
 import com.github.stinkiex.carpark.service.impl.DefaultSecurityService;
 import com.github.stinkiex.carpark.web.WebUtil;
@@ -30,8 +31,6 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String pass = req.getParameter("password");
-//        if (pass.equals(req.getParameter("repassword"))){ todo
-//
-//        }
+        AuthUser authUser = securityService.createUser(login, pass);
     }
 }

@@ -12,7 +12,16 @@ public class DefaultFlightApplicationDao implements FlightApplicationDao {
     }
 
     @Override
-    public Long save(FlightApplication flightApplication) {
-        return null;
+    public void save(FlightApplication flightApplication) {
+    }
+
+    @Override
+    public void update(FlightApplication flightApplication) {
+
+    }
+
+    @Override
+    public void delete(FlightApplication flightApplication) {
+
     }
 }
