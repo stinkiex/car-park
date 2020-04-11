@@ -8,4 +8,8 @@ public interface UserDao {
     List<User> getMembers();
 
     Long save(User user);
+
+    void deleteUser(String login);
+
+    void updateUser(User user);
 }
