@@ -56,4 +56,14 @@ public class DefaultUserDao implements UserDao {
             throw new RuntimeException();
         }
     }
+
+    @Override
+    public void deleteUser(String login) {//todo
+
+    }
+
+    @Override
+    public void updateUser(User user) {//todo
+
+    }
 }

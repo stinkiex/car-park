@@ -7,12 +7,12 @@ import java.util.List;
 
 public class DefaultCarDao implements CarDao {
     @Override
-    public List<Car> getCars() {
+    public List<Car> getCars() {//todo
         return null;
     }
 
     @Override
-    public Long save(Car car) {
+    public Long save(Car car) {//todo
         return null;
     }
 }
