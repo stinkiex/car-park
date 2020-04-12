@@ -2,9 +2,12 @@ package com.github.stinkiex.carpark.service.impl;
 
 
 import com.github.stinkiex.carpark.dao.AuthUserDao;
+import com.github.stinkiex.carpark.dao.UserDao;
 import com.github.stinkiex.carpark.dao.impl.DefaultAuthUserDao;
+import com.github.stinkiex.carpark.dao.impl.DefaultUserDao;
 import com.github.stinkiex.carpark.model.AuthUser;
 import com.github.stinkiex.carpark.model.Role;
+import com.github.stinkiex.carpark.model.User;
 import com.github.stinkiex.carpark.service.SecurityService;
 
 public class DefaultSecurityService implements SecurityService {
@@ -36,7 +39,7 @@ public class DefaultSecurityService implements SecurityService {
         return null;
     }
 
-    public static boolean checkAlreadyExistsUser(String login){
+    private static boolean checkAlreadyExistsUser(String login) {
         boolean flag = false;
         DefaultAuthUserDao defaultAuthUserDao = new DefaultAuthUserDao();
         if(defaultAuthUserDao.getByLogin(login).equals(login)) {
@@ -46,9 +49,11 @@ public class DefaultSecurityService implements SecurityService {
     }
 
     public AuthUser createUser(String login, String password){
-        if (checkAlreadyExistsUser(login) == false) {
+        if (!checkAlreadyExistsUser(login)) {
             AuthUserDao authUserDao = new DefaultAuthUserDao();
+            UserDao userDao = new DefaultUserDao();
             authUserDao.saveAuthUser(new AuthUser(null, login, password, Role.DRIVER, null));
+            userDao.save(new User(authUserDao.getByLogin(login).getId(), null, null, null));
         }
         return null;
     }
