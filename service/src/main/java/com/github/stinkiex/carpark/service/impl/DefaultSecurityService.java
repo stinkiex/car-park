@@ -3,7 +3,6 @@ package com.github.stinkiex.carpark.service.impl;
 
 import com.github.stinkiex.carpark.dao.AuthUserDao;
 import com.github.stinkiex.carpark.dao.impl.DefaultAuthUserDao;
-import com.github.stinkiex.carpark.dao.impl.DefaultUserDao;
 import com.github.stinkiex.carpark.model.AuthUser;
 import com.github.stinkiex.carpark.model.Role;
 import com.github.stinkiex.carpark.service.SecurityService;

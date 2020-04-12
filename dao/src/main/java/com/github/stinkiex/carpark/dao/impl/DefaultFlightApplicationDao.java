@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DefaultFlightApplicationDao implements FlightApplicationDao {
 
-    private static final Logger log = LoggerFactory.getLogger(DefaultAuthUserDao.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultFlightApplicationDao.class);
 
     private static class SingletonHolder {
         static final FlightApplicationDao HOLDER_INSTANCE = new DefaultFlightApplicationDao();
@@ -70,13 +70,43 @@ public class DefaultFlightApplicationDao implements FlightApplicationDao {
     }
 
     @Override
-    public void update(FlightApplication flightApplication) {
-        //todo
-
+    public long update(FlightApplication flightApplication) {
+        long flag = 0;
+        String sql = "UPDATE flightapplication SET driver = ?, car = ?, datebegin = ?, dateexp = ?, cargo = ?, weight = ?, flightstatus = ?";
+        sql += " WHERE id = ?";
+        try (Connection connection = DataSource.getInstance().getConnection();
+             PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            ps.setString(1, flightApplication.getDriver());
+            ps.setString(2, flightApplication.getCar());
+            ps.setString(3, flightApplication.getDateBeg());
+            ps.setString(4, flightApplication.getDateExp());
+            ps.setString(5, flightApplication.getCargo());
+            ps.setInt(6, flightApplication.getWeight());
+            ps.setString(7, flightApplication.getFlightStatus());
+            ps.executeUpdate();
+        }catch (SQLException e){
+            log.error("Failed update рейс номер: {}", flightApplication.toString());
+            throw new RuntimeException();
+        }
+        flag = 1;
+        log.info("Succesful updated рейс номер: {}", flightApplication.toString());
+        return flag;
     }
 
     @Override
-    public void delete(FlightApplication flightApplication) {
-        //todo
+    public long delete(FlightApplication flightApplication) {
+        long flag = 0;
+        String sql = "DELETE FROM flightapplication WHERE id = ?";
+        try (Connection connection = DataSource.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setLong(1, flightApplication.getId());
+            preparedStatement.executeUpdate();
+            log.info("Рейс № {} удалён успешно", flightApplication.getId());
+        }catch (SQLException e){
+            log.error("Ошибка при удалении рейса №:{}", flightApplication.getId(), e);
+            throw new RuntimeException();
+        }
+        flag = 1;
+        return flag;
     }
 }

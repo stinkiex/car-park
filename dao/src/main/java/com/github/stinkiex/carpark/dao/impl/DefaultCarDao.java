@@ -12,7 +12,7 @@ import java.util.List;
 
 public class DefaultCarDao implements CarDao {
 
-    private static final Logger log = LoggerFactory.getLogger(DefaultAuthUserDao.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultCarDao.class);
 
     private static class SingletonHolder {
         static final CarDao HOLDER_INSTANCE = new DefaultCarDao();
@@ -61,5 +61,43 @@ public class DefaultCarDao implements CarDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public long deleteCar(Car car) {
+        long flag = 0;
+        String sql = "DELETE FROM car WHERE carid = ?";
+        try (Connection connection = DataSource.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setLong(1, car.getCarId());
+            preparedStatement.executeUpdate();
+            log.info("Car No: {} deleted", car.getRegNumber());
+        }catch (SQLException e){
+            log.error("Fail to delete car No.:{}", car.getRegNumber(), e);
+            throw new RuntimeException();
+        }
+        flag = 1;
+        return flag;
+    }
+
+    @Override
+    public long updateCar(Car car) {
+        long flag = 0;
+        String sql = "UPDATE car SET name = ?, model = ?, regnumber = ?, needforrepair =?";
+        sql += " WHERE carid = ?";
+        try (Connection connection = DataSource.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setString(1, car.getName());
+            preparedStatement.setString(2, car.getModel());
+            preparedStatement.setString(3, car.getRegNumber());
+            preparedStatement.setInt(4, car.getNeedForRepair());
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            log.error("Failed update car No: {}", car.getRegNumber());
+            throw new RuntimeException();
+        }
+        flag = 1;
+        log.info("Car No: {} successful updated ", car.getRegNumber());
+        return flag;
     }
 }
