@@ -9,7 +9,7 @@ public interface UserDao {
 
     Long save(User user);
 
-    void deleteUser(String login);
+    long deleteUser(User user);
 
-    void updateUser(User user);
+    long updateUser(User user);
 }
