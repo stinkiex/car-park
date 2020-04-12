@@ -8,8 +8,8 @@ public class FlightApplication {
     private String cargo;
     private int weight;
     private String flightStatus;
-    private String car;  //Todo связать с машинами;
-    private String driver; //Todo connect with users
+    private String car;
+    private String driver;
 
     public FlightApplication(long id, String dateBeg, String dateExp, String cargo, int weight, String flightStatus, String car, String driver) {
         this.id = id;
