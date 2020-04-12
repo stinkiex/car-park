@@ -50,9 +50,9 @@ public class DefaultUserDao implements UserDao {
         String sql = "insert into user(firstname, lastname, phone) values(?,?,?)";
         try (Connection connection = DataSource.getInstance().getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            preparedStatement.setString(2, user.getFirstName());
-            preparedStatement.setString(3, user.getLastName());
-            preparedStatement.setString(4, user.getPhoneNumber());
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getPhoneNumber());
             preparedStatement.executeUpdate();
             try (ResultSet keys = preparedStatement.getGeneratedKeys()){
                 keys.next();
@@ -89,9 +89,9 @@ public class DefaultUserDao implements UserDao {
         sql += " WHERE id = ?";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            preparedStatement.setString(2, user.getFirstName());
-            preparedStatement.setString(3, user.getLastName());
-            preparedStatement.setString(4, user.getPhoneNumber());
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getPhoneNumber());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
             log.error("Failed update user: {}", user);

@@ -3,12 +3,16 @@ package com.github.stinkiex.carpark.dao.impl;
 import com.github.stinkiex.carpark.dao.CarDao;
 import com.github.stinkiex.carpark.dao.DataSource;
 import com.github.stinkiex.carpark.model.Car;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultCarDao implements CarDao {
+
+    private static final Logger log = LoggerFactory.getLogger(DefaultAuthUserDao.class);
 
     private static class SingletonHolder {
         static final CarDao HOLDER_INSTANCE = new DefaultCarDao();
@@ -45,10 +49,10 @@ public class DefaultCarDao implements CarDao {
         final String sql = "insert into car(name, model, regnumber, needforrepair) values(?,?,?,?)";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(2, car.getName());
-            ps.setString(3, car.getModel());
-            ps.setString(4, car.getRegNumber());
-            ps.setInt(5, car.getNeedForRepair());
+            ps.setString(1, car.getName());
+            ps.setString(2, car.getModel());
+            ps.setString(3, car.getRegNumber());
+            ps.setInt(4, car.getNeedForRepair());
             ps.executeUpdate();
             try (ResultSet keys = ps.getGeneratedKeys()) {
                 keys.next();

@@ -3,12 +3,16 @@ package com.github.stinkiex.carpark.dao.impl;
 import com.github.stinkiex.carpark.dao.DataSource;
 import com.github.stinkiex.carpark.dao.FlightApplicationDao;
 import com.github.stinkiex.carpark.model.FlightApplication;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultFlightApplicationDao implements FlightApplicationDao {
+
+    private static final Logger log = LoggerFactory.getLogger(DefaultAuthUserDao.class);
 
     private static class SingletonHolder {
         static final FlightApplicationDao HOLDER_INSTANCE = new DefaultFlightApplicationDao();
@@ -49,13 +53,13 @@ public class DefaultFlightApplicationDao implements FlightApplicationDao {
         final String sql = "insert into flightapplication(driver, car, datebegin, dateexp, cargo, weight, flightstatus) values(?,?,?,?,?,?,?)";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            ps.setString(2, flightApplication.getDriver());
-            ps.setString(3, flightApplication.getCar());
-            ps.setString(4, flightApplication.getDateBeg());
-            ps.setString(5, flightApplication.getDateExp());
-            ps.setString(6, flightApplication.getCargo());
-            ps.setInt(7, flightApplication.getWeight());
-            ps.setString(8, flightApplication.getFlightStatus());
+            ps.setString(1, flightApplication.getDriver());
+            ps.setString(2, flightApplication.getCar());
+            ps.setString(3, flightApplication.getDateBeg());
+            ps.setString(4, flightApplication.getDateExp());
+            ps.setString(5, flightApplication.getCargo());
+            ps.setInt(6, flightApplication.getWeight());
+            ps.setString(7, flightApplication.getFlightStatus());
             ps.executeUpdate();
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 return generatedKeys.getLong(1);
