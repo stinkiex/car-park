@@ -9,8 +9,11 @@ import com.github.stinkiex.carpark.model.AuthUser;
 import com.github.stinkiex.carpark.model.Role;
 import com.github.stinkiex.carpark.model.User;
 import com.github.stinkiex.carpark.service.SecurityService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DefaultSecurityService implements SecurityService {
+    private static final Logger log = LoggerFactory.getLogger(DefaultSecurityService.class);
     private AuthUserDao authUserDao = DefaultAuthUserDao.getInstance();
 
     private static volatile SecurityService instance;
@@ -34,8 +37,10 @@ public class DefaultSecurityService implements SecurityService {
             return null;
         }
         if (user.getPassword().equals(password)) {
+            log.info("user {} loggined sucesful", login);
             return user;
         }
+        log.error("Login failed: error {} or password", login);
         return null;
     }
 
@@ -54,6 +59,7 @@ public class DefaultSecurityService implements SecurityService {
             UserDao userDao = new DefaultUserDao();
             authUserDao.saveAuthUser(new AuthUser(null, login, password, Role.DRIVER, null));
             userDao.save(new User(authUserDao.getByLogin(login).getId(), null, null, null));
+            log.info("User {} successful greated", login);
         }
         return null;
     }
