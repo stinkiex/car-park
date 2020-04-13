@@ -1,6 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html lang="RU">
 <head>
@@ -10,26 +10,31 @@
 <body>
 
 <h3>Register</h3>
-
-<c: items="${checkFields != null}">
-    <c:forEach items="${checkFields}" var
-    "checkField">
+${checkFields}
+<c:if test="${checkFields != null}">
+    <c:forEach items="${checkFields}" var = "checkField">
     <p>${checkField}</p>
     </c:forEach>
-    </c:if>
+</c:if>
 <center>
     <form action="${pageContext.request.contextPath}/register" method="post">
         <label for="firstName">Имя</label>
-        <input id="firstName" type="text" required><br/>
+        <input id="firstName" type="text" size="10" required><br/>
         <label for="lastName">Фамилия</label>
-        <input id="lastName" type="text" required><br/><br/>
+        <input id="lastName" type="text" size="10" required><br/><br/>
         <label for="login">Login</label>
-        <input id="login" type="text" required> <br/>
+        <input id="login" type="text" size="10" required> <br/>
         <label for="password">Password</label>
-        <input id="password" type="password" required><br/>
+        <input id="password" type="password" size="10" required><br/>
         <label for="repassword">Confirm password</label>
-        <input id="repassword" type="password" required><br/>
-        <input type="submit" name="Sign Up" value="Sign Up">
+        <input id="repassword" type="password" size="10" required><br>
+        <table>
+            <tr>
+                <td><input type="submit" name="signup" value="Sign Up"></td>
+                <td><input type="submit" name="cancel" value="CANCEL"></td>
+            </tr>
+        </table>
+
     </form>
 </center>
 

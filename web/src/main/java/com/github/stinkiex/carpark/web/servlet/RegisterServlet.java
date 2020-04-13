@@ -45,7 +45,7 @@ public class RegisterServlet extends HttpServlet {
         }
         log.info("user {} registered", authUser.getLogin());
         req.getSession().setAttribute("authUser", authUser.getLogin());
-        WebUtil.redirect("/student", req, resp);//todo Запилить валидацию полей
+        WebUtil.redirect("/cabinet", req, resp);//todo Запилить валидацию полей
     }
 
 

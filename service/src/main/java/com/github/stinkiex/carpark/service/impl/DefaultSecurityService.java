@@ -47,7 +47,7 @@ public class DefaultSecurityService implements SecurityService {
     private static boolean checkAlreadyExistsUser(String login) {
         boolean flag = false;
         DefaultAuthUserDao defaultAuthUserDao = new DefaultAuthUserDao();
-        if(defaultAuthUserDao.getByLogin(login).equals(login)) {
+        if(login.equals(defaultAuthUserDao.getByLogin(login))) {
             flag = true;
         }
         return flag;
