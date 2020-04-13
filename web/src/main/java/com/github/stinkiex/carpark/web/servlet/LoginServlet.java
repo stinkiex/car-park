@@ -40,6 +40,6 @@ public class LoginServlet extends HttpServlet {
         }
         log.info("user {} logged", user.getLogin());
         rq.getSession().setAttribute("authUser", user);
-        WebUtil.redirect("/student", rq, rs);
+        WebUtil.redirect("/cabinet", rq, rs);
     }
 }
