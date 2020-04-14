@@ -5,17 +5,18 @@
 <html>
 <right><a href="${pageContext.request.contextPath}/logout">logout</a></right>
 <h3>Список машин</h3>
-<c:if test="${cars != null}">
+<jsp:useBean id="carList" scope="request" type="java.util.List"/>
+<c:if test="${carList != null}">
     <table>
         <tr>
             <th>#</th>
             <th>Марка</th>
             <th>Модель</th>
             <th>Государственный номер</th>
-            <th>исправность</th>
+            <th>Исправность</th>
             <c:if test="${authUser.role == 'DISPATCHER'}"><td>Изменить</td></c:if>
         </tr>
-        <c:forEach items="${cars}" var="cars">
+        <c:forEach items="${carList}" var="cars">
             <tr>
                 <td>${cars.getId}</td>
                 <td>${cars.getName}</td>
@@ -26,7 +27,6 @@
         </c:forEach>
     </table>
 </c:if>
-
 
 <c:if test="${authUser.role == 'DISPATCHER'}">
     <h3>Добавить машину</h3>

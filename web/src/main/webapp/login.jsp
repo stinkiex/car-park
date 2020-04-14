@@ -16,7 +16,7 @@
 
     <label for="password">password</label>
     <input id="password" type="password" name="password"><br/>
-    <input type="submit">
+    <input type="submit"></form><br/>
 
     <small><a href="register.jsp">Зарегистрироваться</a> </small>
 </form>

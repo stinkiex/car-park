@@ -7,6 +7,10 @@ public class Car {
     private String regNumber;
     private int needForRepair;
 
+    public Car(){
+
+    }
+
     public Car(Long carId, String name, String model, String regNumber, int needForRepair) {
         this.carId = carId;
         this.name = name;
@@ -33,5 +37,25 @@ public class Car {
 
     public int getNeedForRepair() {
         return needForRepair;
+    }
+
+    public void setCarId(Long carId) {
+        this.carId = carId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setRegNumber(String regNumber) {
+        this.regNumber = regNumber;
+    }
+
+    public void setNeedForRepair(int needForRepair) {
+        this.needForRepair = needForRepair;
     }
 }

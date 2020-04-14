@@ -8,6 +8,17 @@
     <title>Личный Кабинет</title>
 </head>
 <body>
+<table>
+
+</table>
+<tr>
+    <th><a href="${pageContext.request.contextPath}/cars">Список машин</a> </th>
+    <th>ПЕРЕВОЗКИ</th>
+    <th>ЗАЯВКИ НА РЕМОНТ</th>
+    <th>PROFILE</th>
+    <th><a href="${pageContext.request.contextPath}/logout">logout</a></th>
+</tr>
+
 Добро пожаловать
 
 

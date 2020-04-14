@@ -25,7 +25,7 @@ public class DefaultCarDao implements CarDao {
     @Override
     public List<Car> getCars() {
         try (Connection connection = DataSource.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from car");
+             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM car");
              ResultSet resultSet = preparedStatement.executeQuery()){
             final List<Car> result = new ArrayList<>();
             while(resultSet.next()){

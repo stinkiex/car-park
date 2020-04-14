@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
             WebUtil.forward("login", rq, rs);
             return;
         }
-        WebUtil.redirect("/cabinet", rq, rs);
+        WebUtil.redirect("cabinet", rq, rs);
     }
 
     @Override
