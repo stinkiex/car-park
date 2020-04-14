@@ -88,15 +88,19 @@ public class DefaultAuthUserDao implements AuthUserDao {
 
     @Override
     public long checkExistUser(String login){
-        long result = -10;
-        String sql = "SELECT id FROM auth_user WHERE login='?' ";
+        long flag = 0;
+        String result = null;
+        String sql = "SELECT id FROM auth_user WHERE login LIKE '% ? %' ";
         try(Connection connection = DataSource.getInstance().getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setString(1, login);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                result = resultSet.getLong("id");
-            } return result;
+                result = String.valueOf(resultSet.getLong("id"));
+                if (!result.isEmpty()){
+                    flag = 1;
+                };
+            } return flag;
         }catch (SQLException e) {
             log.error("User with login {} not Found", login);
             throw new RuntimeException(e);
