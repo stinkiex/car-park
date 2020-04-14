@@ -1,10 +1,8 @@
 package com.github.stinkiex.carpark.service.impl;
 
 import com.github.stinkiex.carpark.dao.CarDao;
-import com.github.stinkiex.carpark.dao.UserDao;
 import com.github.stinkiex.carpark.dao.impl.DefaultCarDao;
 import com.github.stinkiex.carpark.model.Car;
-import com.github.stinkiex.carpark.model.User;
 import com.github.stinkiex.carpark.service.CarService;
 
 import java.util.List;
@@ -28,10 +26,11 @@ public class DefaultCarService implements CarService {
         return localInstance;
     }
 
-    public void addCar(String name, String model, String regNumber ){
+    public long addCar(String name, String model, String regNumber ){
         Car car = new Car(null, name,model, regNumber, 0);
         CarDao carDao = DefaultCarDao.getInstance();
-        carDao.save(car);
+        long flag = carDao.save(car);
+        return flag;
     }
 
     public Long deleteCar(Car car){
