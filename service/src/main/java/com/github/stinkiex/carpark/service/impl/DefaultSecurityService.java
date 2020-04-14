@@ -61,7 +61,7 @@ public class DefaultSecurityService implements SecurityService {
     }
 
     public static void main(String[] args) {
-        String login = "loginnnn";
+        String login = "loginщnn";
         String pass = "passs";
         String fname = "Firstname";
         String lname = "LastName";

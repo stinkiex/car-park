@@ -38,6 +38,7 @@ public class RegisterServlet extends HttpServlet {
         String pass = req.getParameter("password");
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
+        //todo Запилить чек-юзер и вкинуть сюда
         Long flag = securityService.createUser(login, pass, firstName, lastName);
         if (flag == null) {
             req.setAttribute("error", "login or password invalid");

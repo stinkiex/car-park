@@ -59,6 +59,7 @@ public class DefaultAuthUserDao implements AuthUserDao {
             ps.setLong(4, user.getUserId());
             ps.executeUpdate();
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                generatedKeys.next();
                 log.info("Auth user created: {}", user);
                 return generatedKeys.getLong(1);
             }

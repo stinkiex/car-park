@@ -5,18 +5,17 @@
 <html>
 <right><a href="${pageContext.request.contextPath}/logout">logout</a></right>
 <h3>Список машин</h3>
-<jsp:useBean id="carList" scope="request" type="java.util.List"/>
+<table>
 <c:if test="${carList != null}">
-    <table>
         <tr>
-            <th>#</th>
-            <th>Марка</th>
-            <th>Модель</th>
-            <th>Государственный номер</th>
-            <th>Исправность</th>
+            <td>#</td>
+            <td>Марка</td>
+            <td>Модель</td>
+            <td>Государственный номер</td>
+            <td>Исправность</td>
             <c:if test="${authUser.role == 'DISPATCHER'}"><td>Изменить</td></c:if>
         </tr>
-        <c:forEach items="${carList}" var="cars">
+        <c:forEach var="cars" items="${carList}">
             <tr>
                 <td>${cars.getId}</td>
                 <td>${cars.getName}</td>
