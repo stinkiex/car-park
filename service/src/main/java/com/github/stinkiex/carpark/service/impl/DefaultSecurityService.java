@@ -43,13 +43,8 @@ public class DefaultSecurityService implements SecurityService {
         return null;
     }
 
-    private static boolean checkAlreadyExistsUser(String login) {
-        boolean flag = false;
-        DefaultAuthUserDao defaultAuthUserDao = new DefaultAuthUserDao();
-        if (login.equals(defaultAuthUserDao.getByLogin(login))) {
-            flag = true;
-        }
-        return flag;
+    public long checkAlreadyExistsUser(String login) {
+        return authUserDao.checkExistUser(login);
     }
 
     public Long createUser(String login, String password, String firstName, String lastName) {

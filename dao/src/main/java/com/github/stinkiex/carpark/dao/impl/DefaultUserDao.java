@@ -57,14 +57,15 @@ public class DefaultUserDao implements UserDao {
     @Override
     public long idByFirstNameAndlastName(String firstName, String lastName){
         long result = 0;
-        String sql = "SELECT id FROM user WHERE firstname = ";
+        String sql = "SELECT id FROM user WHERE firstname = '";
         sql += firstName;
-        sql += "AND lastname = ";
+        sql += "'AND lastname = ";
+        sql += "'";
         sql += lastName;
+        sql += "'";
         try (Connection connection = DataSource.getInstance().getConnection()){
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<User> list = new ArrayList<>();
             while(resultSet.next()){
                 result = resultSet.getLong("id");
             }

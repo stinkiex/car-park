@@ -8,4 +8,6 @@ public interface AuthUserDao {
     long saveAuthUser(AuthUser user);
 
     long deleteAuthUser(int id);
+
+    long checkExistUser(String login);
 }

@@ -72,7 +72,7 @@ public class DefaultAuthUserDao implements AuthUserDao {
     @Override
     public long deleteAuthUser(int id) {
         long flag = 0;
-        String sql = "DELETE FROM auth_user WHERE userId = ?";
+        String sql = "DELETE * FROM auth_user WHERE userId = ?";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setLong(1, id);
@@ -84,5 +84,22 @@ public class DefaultAuthUserDao implements AuthUserDao {
         }
         flag = 1;
         return flag;
+    }
+
+    @Override
+    public long checkExistUser(String login){
+        long result = -10;
+        String sql = "SELECT id FROM auth_user WHERE login='?' ";
+        try(Connection connection = DataSource.getInstance().getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(sql)){
+            preparedStatement.setString(1, login);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                result = resultSet.getLong("id");
+            } return result;
+        }catch (SQLException e) {
+            log.error("User with login {} not Found", login);
+            throw new RuntimeException(e);
+        }
     }
 }
