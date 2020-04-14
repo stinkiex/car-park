@@ -39,7 +39,7 @@ public class DefaultAuthUserDao implements AuthUserDao {
             }
         } catch (SQLException e) {
             log.error("User {} not found", login);
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -79,7 +79,7 @@ public class DefaultAuthUserDao implements AuthUserDao {
             log.info("Deleted Authuser with id: {}", id);
         }catch (SQLException e){
             log.error("Fail to delete user with userid :{}", id, e);
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
         flag = 1;
         return flag;

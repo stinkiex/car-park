@@ -39,7 +39,7 @@ public class DefaultUserDao implements UserDao {
             }
         } catch (SQLException e) {
             log.error("fail to save user:{}", user, e);
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 

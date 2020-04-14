@@ -44,7 +44,7 @@ public class DefaultFlightApplicationDao implements FlightApplicationDao {
             }
             return result;
         } catch (SQLException e) {
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
@@ -86,7 +86,7 @@ public class DefaultFlightApplicationDao implements FlightApplicationDao {
             ps.executeUpdate();
         }catch (SQLException e){
             log.error("Failed update рейс номер: {}", flightApplication.toString());
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
         flag = 1;
         log.info("Succesful updated рейс номер: {}", flightApplication.toString());
@@ -104,7 +104,7 @@ public class DefaultFlightApplicationDao implements FlightApplicationDao {
             log.info("Рейс № {} удалён успешно", flightApplication.getId());
         }catch (SQLException e){
             log.error("Ошибка при удалении рейса №:{}", flightApplication.getId(), e);
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
         flag = 1;
         return flag;

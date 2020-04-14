@@ -29,8 +29,8 @@ public class DefaultCarDao implements CarDao {
              ResultSet resultSet = preparedStatement.executeQuery()){
             final List<Car> result = new ArrayList<>();
             while(resultSet.next()){
-                final Car car = new Car(
-                        resultSet.getLong("id"),
+                Car car = new Car(
+                        resultSet.getLong("carid"),
                         resultSet.getString("name"),
                         resultSet.getString("model"),
                         resultSet.getString("regnumber"),
@@ -40,13 +40,15 @@ public class DefaultCarDao implements CarDao {
             }
             return result;
         } catch (SQLException e){
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
 
+
+
     @Override
     public Long save(Car car) {
-        final String sql = "insert into car(name, model, regnumber, needforrepair) values(?,?,?,?)";
+        final String sql = "INSERT INTO car(name, model, regnumber, needforrepair) VALUES(?,?,?,?)";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, car.getName());

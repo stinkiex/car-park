@@ -58,4 +58,32 @@ public class Car {
     public void setNeedForRepair(int needForRepair) {
         this.needForRepair = needForRepair;
     }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "carId=" + carId +
+                ", name='" + name + '\'' +
+                ", model='" + model + '\'' +
+                ", regNumber='" + regNumber + '\'' +
+                ", needForRepair=" + needForRepair +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return needForRepair == car.needForRepair &&
+                carId.equals(car.carId) &&
+                name.equals(car.name) &&
+                model.equals(car.model) &&
+                regNumber.equals(car.regNumber);
+    }
 }
