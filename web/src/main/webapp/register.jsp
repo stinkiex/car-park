@@ -37,7 +37,6 @@ ${checkFields}
 
     </form>
 </center>
-
     <p style="color: red">${error}</p>
 
 </body>

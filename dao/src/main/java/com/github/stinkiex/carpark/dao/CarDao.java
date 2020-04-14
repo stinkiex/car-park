@@ -9,7 +9,7 @@ public interface CarDao {
 
     Long save(Car car);
 
-    long deleteCar(Car car);
+    long deleteCar(Long id);
 
     long updateCar(Car car);
 }

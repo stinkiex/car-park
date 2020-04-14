@@ -5,6 +5,8 @@ import com.github.stinkiex.carpark.model.User;
 import java.util.List;
 
 public interface UserDao {
+    long idByFirstNameAndlastName(String firstName, String lastName);
+
     List<User> getMembers();
 
     Long save(User user);

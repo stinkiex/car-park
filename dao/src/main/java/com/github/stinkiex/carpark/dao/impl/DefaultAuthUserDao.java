@@ -21,7 +21,6 @@ public class DefaultAuthUserDao implements AuthUserDao {
         return DefaultAuthUserDao.SingletonHolder.HOLDER_INSTANCE;
     }
 
-
     public AuthUser getByLogin(String login) {
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("select * from auth_user where login = ?")) {
@@ -33,7 +32,7 @@ public class DefaultAuthUserDao implements AuthUserDao {
                             resultSet.getString("login"),
                             resultSet.getString("password"),
                             Role.valueOf(resultSet.getString("role")),
-                            resultSet.getString("userid"));
+                            resultSet.getLong("userid"));
                 } else {
                     return null;
                 }
@@ -44,6 +43,11 @@ public class DefaultAuthUserDao implements AuthUserDao {
         }
     }
 
+//    public static void main(String[] args) {
+//        AuthUser authUser = new AuthUser(null, "login3", "pass", Role.DRIVER, 5L);
+//        long val = DefaultAuthUserDao.getInstance().saveAuthUser(authUser);
+//        System.out.println(val);
+//    }
 
     public long saveAuthUser(AuthUser user) {
         final String sql = "insert into auth_user(login, password, role, userid) values(?,?,?,?)";
@@ -52,7 +56,7 @@ public class DefaultAuthUserDao implements AuthUserDao {
             ps.setString(1, user.getLogin());
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getRole().name());
-            ps.setString(4, user.getUserId());
+            ps.setLong(4, user.getUserId());
             ps.executeUpdate();
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 log.info("Auth user created: {}", user);
@@ -61,7 +65,7 @@ public class DefaultAuthUserDao implements AuthUserDao {
         } catch (SQLException e) {
             log.error("Failed creat user: {}", user);
             throw new RuntimeException(e);
-        }
+        }//todo Разобраться с синзронным (User + Auth) созданием
     }
 
     @Override

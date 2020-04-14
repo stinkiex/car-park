@@ -64,16 +64,16 @@ public class DefaultCarDao implements CarDao {
     }
 
     @Override
-    public long deleteCar(Car car) {
+    public long deleteCar(Long id) {
         long flag = 0;
         String sql = "DELETE FROM car WHERE carid = ?";
         try (Connection connection = DataSource.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            preparedStatement.setLong(1, car.getCarId());
+            PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setLong(1, id);
             preparedStatement.executeUpdate();
-            log.info("Car No: {} deleted", car.getRegNumber());
+            log.info("Car No: {} deleted", id);
         }catch (SQLException e){
-            log.error("Fail to delete car No.:{}", car.getRegNumber(), e);
+            log.error("Fail to delete car No.:{}", id, e);
             throw new RuntimeException();
         }
         flag = 1;

@@ -22,6 +22,58 @@ public class DefaultUserDao implements UserDao {
         return DefaultUserDao.SingletonHolder.HOLDER_INSTANCE;
     }
 
+
+    @Override
+    public Long save(User user) {
+        String sql = "insert into user(firstname, lastname, phone) values(?,?,?)";
+        try (Connection connection = DataSource.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            preparedStatement.setString(1, user.getFirstName());
+            preparedStatement.setString(2, user.getLastName());
+            preparedStatement.setString(3, user.getPhoneNumber());
+            preparedStatement.executeUpdate();
+            try (ResultSet keys = preparedStatement.getGeneratedKeys()) {
+                keys.next();
+                log.info("User {} created: ", user.toString());
+                return keys.getLong(1);
+            }
+        } catch (SQLException e) {
+            log.error("fail to save user:{}", user, e);
+            throw new RuntimeException();
+        }
+    }
+
+    public static void main(String[] args) {
+        UserDao userDao = new DefaultUserDao();
+        userDao.save(new User(null, "Иван", "Иванов", "+375114567890"));
+    }
+
+
+
+    /*
+    Комментарий
+     */
+
+    @Override
+    public long idByFirstNameAndlastName(String firstName, String lastName){
+        long result = 0;
+        String sql = "SELECT id FROM user WHERE firstname = ";
+        sql += firstName;
+        sql += "AND lastname = ";
+        sql += lastName;
+        try (Connection connection = DataSource.getInstance().getConnection()){
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<User> list = new ArrayList<>();
+            while(resultSet.next()){
+                result = resultSet.getLong("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     @Override
     public List<User> getMembers() {
         try (Connection connection = DataSource.getInstance().getConnection();
@@ -45,25 +97,7 @@ public class DefaultUserDao implements UserDao {
         }
     }
 
-    @Override
-    public Long save(User user) {
-        String sql = "insert into user(firstname, lastname, phone) values(?,?,?)";
-        try (Connection connection = DataSource.getInstance().getConnection();
-        PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            preparedStatement.setString(1, user.getFirstName());
-            preparedStatement.setString(2, user.getLastName());
-            preparedStatement.setString(3, user.getPhoneNumber());
-            preparedStatement.executeUpdate();
-            try (ResultSet keys = preparedStatement.getGeneratedKeys()){
-                keys.next();
-                log.info("User saved: {}", user.toString());
-                return keys.getLong(1);
-            }
-        }catch (SQLException e){
-            log.error("fail to save user:{}", user, e);
-            throw new RuntimeException();
-        }
-    }
+
 
     @Override
     public long deleteUser(User user) {

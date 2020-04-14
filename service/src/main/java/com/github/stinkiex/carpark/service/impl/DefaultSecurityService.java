@@ -1,6 +1,5 @@
 package com.github.stinkiex.carpark.service.impl;
 
-
 import com.github.stinkiex.carpark.dao.AuthUserDao;
 import com.github.stinkiex.carpark.dao.UserDao;
 import com.github.stinkiex.carpark.dao.impl.DefaultAuthUserDao;
@@ -47,20 +46,26 @@ public class DefaultSecurityService implements SecurityService {
     private static boolean checkAlreadyExistsUser(String login) {
         boolean flag = false;
         DefaultAuthUserDao defaultAuthUserDao = new DefaultAuthUserDao();
-        if(login.equals(defaultAuthUserDao.getByLogin(login))) {
+        if (login.equals(defaultAuthUserDao.getByLogin(login))) {
             flag = true;
         }
         return flag;
     }
 
-    public AuthUser createUser(String login, String password){
-        if (!checkAlreadyExistsUser(login)) {
-            AuthUserDao authUserDao = new DefaultAuthUserDao();
-            UserDao userDao = new DefaultUserDao();
-            authUserDao.saveAuthUser(new AuthUser(null, login, password, Role.DRIVER, null));
-            userDao.save(new User(authUserDao.getByLogin(login).getId(), null, null, null));
-            log.info("User {} successful greated", login);
-        }
-        return null;
+    public Long createUser(String login, String password, String firstName, String lastName) {
+        long result = 0;
+        AuthUserDao authUserDao = new DefaultAuthUserDao();
+        UserDao userDao = new DefaultUserDao();
+        authUserDao.saveAuthUser(new AuthUser(null, login, password, Role.DRIVER, userDao.save(new User(null, firstName, lastName, null))));
+        return result;
+    }
+
+    public static void main(String[] args) {
+        String login = "loginnnn";
+        String pass = "passs";
+        String fname = "Firstname";
+        String lname = "LastName";
+        SecurityService securityService = DefaultSecurityService.getInstance();
+        securityService.createUser(login, pass,fname,lname);
     }
 }

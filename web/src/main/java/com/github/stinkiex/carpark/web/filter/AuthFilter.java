@@ -19,8 +19,8 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest)servletRequest;
         Object authUser = req.getAttribute("authUser");
-        if (authUser==null){
-            WebUtil.redirect("index", req, (HttpServletResponse) servletResponse);
+        if (authUser == null){
+            WebUtil.redirect("login", req, (HttpServletResponse) servletResponse);
         }
         filterChain.doFilter(req, servletResponse);
     }

@@ -1,6 +1,7 @@
 package com.github.stinkiex.carpark.web.servlet;
 
 import com.github.stinkiex.carpark.model.AuthUser;
+import com.github.stinkiex.carpark.model.User;
 import com.github.stinkiex.carpark.service.SecurityService;
 import com.github.stinkiex.carpark.service.impl.DefaultSecurityService;
 import com.github.stinkiex.carpark.web.WebUtil;
@@ -37,14 +38,14 @@ public class RegisterServlet extends HttpServlet {
         String pass = req.getParameter("password");
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
-        AuthUser authUser = securityService.createUser(login, pass);
-        if (authUser == null) {
+        Long flag = securityService.createUser(login, pass, firstName, lastName);
+        if (flag == null) {
             req.setAttribute("error", "login or password invalid");
             WebUtil.forward("register", req, resp);
             return;
         }
-        log.info("user {} registered", authUser.getLogin());
-        req.getSession().setAttribute("authUser", authUser.getLogin());
+        log.info("user {} registered", login);
+        req.getSession().setAttribute("authUser", login);
         WebUtil.redirect("/cabinet", req, resp);//todo Запилить валидацию полей
     }
 
