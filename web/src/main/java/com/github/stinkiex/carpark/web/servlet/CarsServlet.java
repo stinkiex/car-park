@@ -4,6 +4,8 @@ import com.github.stinkiex.carpark.model.Car;
 import com.github.stinkiex.carpark.service.CarService;
 import com.github.stinkiex.carpark.service.impl.DefaultCarService;
 import com.github.stinkiex.carpark.web.WebUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,30 +13,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-@WebServlet(name = "Car Delete Servlet", urlPatterns = "/deletecar")
-public class CarDeleteServlet extends HttpServlet {
+@WebServlet(name = "CarServlet", urlPatterns = "/cars")
+public class CarsServlet extends HttpServlet {
 
+    private static final Logger log = LoggerFactory.getLogger(Car.class);
     private CarService carService = DefaultCarService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        List<Car> cars = carService.getCars();
+        req.setAttribute("cars", cars);
+        WebUtil.forward("cars", req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long carId = Long.valueOf(req.getParameter("carId"));
-        String name = req.getParameter("carName");
-        String model = req.getParameter("carModel");
-        String regNumb = req.getParameter("regNumb");
-        Integer repairStatus = Integer.valueOf(req.getParameter("repairStatus"));
-        Car car = new Car(carId, name, model, regNumb, repairStatus);
-        long flag = carService.deleteCar(car);
-        if (flag == 0){
-            req.setAttribute("error", "Ошибка при удалении машины");
-            WebUtil.forward("cars", req, resp);
-        }
-        WebUtil.forward("cars", req, resp);
+        super.doPost(req, resp);
     }
 }
