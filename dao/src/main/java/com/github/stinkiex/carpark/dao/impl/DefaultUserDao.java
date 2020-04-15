@@ -25,7 +25,7 @@ public class DefaultUserDao implements UserDao {
 
     @Override
     public Long save(User user) {
-        String sql = "insert into user(firstname, lastname, phone) values(?,?,?)";
+        String sql = "insert into user(firstname, lastname, phone) values(?, ?, ?)";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, user.getFirstName());
@@ -43,17 +43,6 @@ public class DefaultUserDao implements UserDao {
         }
     }
 
-    public static void main(String[] args) {
-        UserDao userDao = new DefaultUserDao();
-        userDao.save(new User(null, "Иван", "Иванов", "+375114567890"));
-    }
-
-
-
-    /*
-    Комментарий
-     */
-
     @Override
     public long idByFirstNameAndlastName(String firstName, String lastName){
         long result = 0;
@@ -70,10 +59,27 @@ public class DefaultUserDao implements UserDao {
                 result = resultSet.getLong("id");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("Failed to save User {} {}", firstName, lastName);
+            throw new RuntimeException(e);
         }
         return result;
     }
+
+    public static void main(String[] args) {
+        UserDao userDao = new DefaultUserDao();
+        String fname = "Тестовое Имя";
+        String lname = "Тестовая фамилия";
+        userDao.save(new User(null, "fname", "lname", "+375114567890"));
+        System.out.println(userDao.idByFirstNameAndlastName(fname, lname));
+    }
+
+
+
+    /*
+    Комментарий
+     */
+
+
 
     @Override
     public List<User> getMembers() {

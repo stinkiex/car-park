@@ -53,4 +53,50 @@ public class FlightApplication {
     public String getCar() {
         return car;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setDateBeg(String dateBeg) {
+        this.dateBeg = dateBeg;
+    }
+
+    public void setDateExp(String dateExp) {
+        this.dateExp = dateExp;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setFlightStatus(String flightStatus) {
+        this.flightStatus = flightStatus;
+    }
+
+    public void setCar(String car) {
+        this.car = car;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    @Override
+    public String toString() {
+        return "FlightApplication{" +
+                "id=" + id +
+                ", dateBeg='" + dateBeg + '\'' +
+                ", dateExp='" + dateExp + '\'' +
+                ", cargo='" + cargo + '\'' +
+                ", weight=" + weight +
+                ", flightStatus='" + flightStatus + '\'' +
+                ", car='" + car + '\'' +
+                ", driver='" + driver + '\'' +
+                '}';
+    }
 }

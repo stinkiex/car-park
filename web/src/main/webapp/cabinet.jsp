@@ -9,15 +9,13 @@
 </head>
 <body>
 <table>
-
-</table>
 <tr>
     <th><a href="${pageContext.request.contextPath}/cars">Список машин</a> </th>
-    <th>ПЕРЕВОЗКИ</th>
+    <th><a href="${pageContext.request.contextPath}/cargo"> ПЕРЕВОЗКИ</a></th>
     <th>ЗАЯВКИ НА РЕМОНТ</th>
     <th>PROFILE</th>
     <th><a href="${pageContext.request.contextPath}/logout">logout</a></th>
-</tr>
+</tr></table>
 
 Добро пожаловать
 

@@ -90,7 +90,7 @@ public class DefaultAuthUserDao implements AuthUserDao {
     public long checkExistUser(String login){
         long flag = 0;
         String result = null;
-        String sql = "SELECT id FROM auth_user WHERE login LIKE '% ? %' ";
+        String sql = "SELECT id FROM auth_user WHERE login = ? ";
         try(Connection connection = DataSource.getInstance().getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(sql)){
             preparedStatement.setString(1, login);

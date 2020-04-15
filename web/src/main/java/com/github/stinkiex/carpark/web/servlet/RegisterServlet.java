@@ -36,9 +36,15 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String pass = req.getParameter("password");
+        String repass = req.getParameter("repassword");
         String firstName = req.getParameter("firstName");
         String lastName = req.getParameter("lastName");
-        if (securityService.checkAlreadyExistsUser(login ) > 0 ) {
+        if (!pass.equals(repass)) {
+            req.setAttribute("error", "Passwords missmatch");
+            WebUtil.forward("register", req, resp);
+            return;
+        }
+        if (securityService.login(login, pass) != null ) {
             req.setAttribute("error", "User already exists");
             WebUtil.forward("register", req, resp);
             return;

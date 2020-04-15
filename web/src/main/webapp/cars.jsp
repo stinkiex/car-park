@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <html>
 <right><a href="${pageContext.request.contextPath}/logout">logout</a></right>
 <h3>Список машин</h3>
-<table>
 <c:if test="${carList != null}">
+    <table>
         <tr>
             <td>#</td>
             <td>Марка</td>
@@ -15,13 +15,13 @@
             <td>Исправность</td>
             <c:if test="${authUser.role == 'DISPATCHER'}"><td>Изменить</td></c:if>
         </tr>
-        <c:forEach var="cars" items="${carList}">
+        <c:forEach var="carList" items="${carList} >
             <tr>
-                <td>${cars.getId}</td>
-                <td>${cars.getName}</td>
-                <td>${cars.getModel}</td>
-                <td>${cars.getRegNumber}</td>
-                <c:if test="${authUser.role == 'DISPATCHER'}"><td>EDIT</td></c:if>
+                <td>${carList.getId}</td>
+                <td>${carList.getName}</td>
+                <td>${carList.getModel}</td>
+                <td>${carList.getRegNumber}</td>
+                <td><c:if test="${authUser.role == 'DISPATCHER'}">EDIT</td></c:if>
             </tr>
         </c:forEach>
     </table>

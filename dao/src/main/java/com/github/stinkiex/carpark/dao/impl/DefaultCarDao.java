@@ -24,9 +24,10 @@ public class DefaultCarDao implements CarDao {
 
     @Override
     public List<Car> getCars() {
+        final String sql = "SELECT * FROM car";
         try (Connection connection = DataSource.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM car");
-             ResultSet resultSet = preparedStatement.executeQuery()){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery(sql)){
             final List<Car> result = new ArrayList<>();
             while(resultSet.next()){
                 Car car = new Car(
@@ -68,7 +69,7 @@ public class DefaultCarDao implements CarDao {
     @Override
     public long deleteCar(Long id) {
         long flag = 0;
-        String sql = "DELETE FROM car WHERE carid = ?";
+        final String sql = "DELETE FROM car WHERE carid = ?";
         try (Connection connection = DataSource.getInstance().getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setLong(1, id);
@@ -85,14 +86,14 @@ public class DefaultCarDao implements CarDao {
     @Override
     public long updateCar(Car car) {
         long flag = 0;
-        String sql = "UPDATE car SET name = ?, model = ?, regnumber = ?, needforrepair =?";
-        sql += " WHERE carid = ?";
+        final String sql = "UPDATE car SET name = ?, model = ?, regnumber = ?, needforrepair =? WHERE carid = ?";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, car.getName());
             preparedStatement.setString(2, car.getModel());
             preparedStatement.setString(3, car.getRegNumber());
             preparedStatement.setInt(4, car.getNeedForRepair());
+            preparedStatement.setLong(5, car.getCarId());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
             log.error("Failed update car No: {}", car.getRegNumber());
@@ -101,5 +102,5 @@ public class DefaultCarDao implements CarDao {
         flag = 1;
         log.info("Car No: {} successful updated ", car.getRegNumber());
         return flag;
-    }
+        }
 }
