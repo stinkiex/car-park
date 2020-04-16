@@ -20,11 +20,11 @@
     </tr>
     <c:forEach items="${cars}" var="car">
             <tr>
-                <td> <c:out value="${car.id}"/> </td>
-                <td> <c:out value="${car.name}"/> </td>
-                <td> <c:out value="${car.model}"/> </td>
-                <td> <c:out value="${car.regnumber}"/> </td>
-                <td> <c:out value="${car.repair}"/> </td>
+                <td align="center"> <c:out value="${car.id}"/> </td>
+                <td align="center"> <c:out value="${car.name}"/> </td>
+                <td align="center"> <c:out value="${car.model}"/> </td>
+                <td align="center"> <c:out value="${car.regnumber}"/> </td>
+                <td align="center"> <c:out value="${car.repair}"/> </td>
             </tr>
     </c:forEach>
 </table>
