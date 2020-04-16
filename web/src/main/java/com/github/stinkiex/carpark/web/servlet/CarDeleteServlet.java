@@ -24,11 +24,11 @@ public class CarDeleteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long carId = Long.valueOf(req.getParameter("carId"));
-        String name = req.getParameter("carName");
-        String model = req.getParameter("carModel");
-        String regNumb = req.getParameter("regNumb");
-        Integer repairStatus = Integer.valueOf(req.getParameter("repairStatus"));
+        Long carId = Long.valueOf(req.getParameter("carid"));
+        String name = req.getParameter("carname");
+        String model = req.getParameter("carmodel");
+        String regNumb = req.getParameter("regnumb");
+        Integer repairStatus = Integer.valueOf(req.getParameter("repairstatus"));
         Car car = new Car(carId, name, model, regNumb, repairStatus);
         long flag = carService.deleteCar(car);
         if (flag == 0){

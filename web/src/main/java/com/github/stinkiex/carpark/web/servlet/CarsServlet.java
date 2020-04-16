@@ -24,8 +24,8 @@ public class CarsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Car> carList = carService.getCars();
-        req.setAttribute("carList", carList);
+        List<Car> carlist = carService.getCars();
+        req.setAttribute("carlist", carlist);
         WebUtil.forward("cars", req, resp);
     }
 

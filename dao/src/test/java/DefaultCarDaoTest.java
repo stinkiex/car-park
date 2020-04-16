@@ -1,27 +1,35 @@
 import com.github.stinkiex.carpark.dao.CarDao;
+import com.github.stinkiex.carpark.dao.DataSource;
 import com.github.stinkiex.carpark.dao.impl.DefaultCarDao;
 import com.github.stinkiex.carpark.model.Car;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Arrays;
+import org.junit.jupiter.api.*;
 import java.util.List;
 
 public class DefaultCarDaoTest {
     CarDao carDao = DefaultCarDao.getInstance();
+    String name = "LADA";
+    String model = "VESTA";
+    String regnumber = "TT0001-9";
+    int needforrepair = 0;
+
 
     @Test
     @DisplayName("Not-null getCars Method Test")
     void getCars(){
-        String name = "LADA";
-        String model = "VESTA";
-        String regnumber = "TT0001-9";
-        int needforrepair = 0;
         carDao.save(new Car(null, name, model, regnumber, needforrepair));
         List<Car> list = carDao.getCars();
         Assertions.assertNotNull(list);
+        Assertions.assertEquals(list.get(list.size()-1).getModel(), model);
     }
 
+    @Test
+    @DisplayName("Equals in and out")
+    void getCarsEquals(){
+        carDao.save(new Car(null, name, model, regnumber, needforrepair));
+        List<Car> list = carDao.getCars();
+        Assertions.assertEquals(list.get(list.size()-1).getModel(), model);
+        Assertions.assertEquals(list.get(list.size()-1).getName(), name);
+        Assertions.assertEquals(list.get(list.size()-1).getRegNumber(), regnumber);
+        Assertions.assertEquals(list.get(list.size()-1).getNeedForRepair(), needforrepair);
+    }
 }

@@ -15,6 +15,7 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest rq, HttpServletResponse rs) {
         rq.getSession().removeAttribute("authUser");
+        rq.getSession().removeAttribute("userRole");
         rq.getSession().invalidate();
         WebUtil.forward("login", rq, rs);
     }

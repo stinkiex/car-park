@@ -21,6 +21,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest rq, HttpServletResponse rs) {
         Object authUser = rq.getSession().getAttribute("authUser");
+        Object userRole = rq.getSession().getAttribute("userRole");
         if (authUser == null) {
             WebUtil.forward("login", rq, rs);
             return;
@@ -40,6 +41,8 @@ public class LoginServlet extends HttpServlet {
         }
         log.info("user {} logged", user.getLogin());
         rq.getSession().setAttribute("authUser", user);
+        rq.getSession().setAttribute("userRole", user.getRole());
+        rq.getSession().setMaxInactiveInterval(3600);
         WebUtil.redirect("/cabinet", rq, rs);
     }
 }

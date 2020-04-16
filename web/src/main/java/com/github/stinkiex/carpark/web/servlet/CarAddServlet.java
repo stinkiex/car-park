@@ -27,12 +27,12 @@ public class CarAddServlet extends HttpServlet{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String carname = req.getParameter("carName");
-        String carModel = req.getParameter("carModel");
-        String carNumber = req.getParameter("regNumber");
+        String carname = req.getParameter("carname");
+        String carModel = req.getParameter("carmodel");
+        String carNumber = req.getParameter("regnumber");
         long flag = carService.addCar(carname, carModel, carNumber);
         if ( flag == 0) {
-            req.setAttribute("error", "Failed to creat car");
+            req.setAttribute("error", "failed to creat car");
             WebUtil.forward("cars", req, resp);
             return;
         }

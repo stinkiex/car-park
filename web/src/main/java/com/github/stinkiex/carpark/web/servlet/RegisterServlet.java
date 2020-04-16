@@ -25,11 +25,12 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest rq, HttpServletResponse rs) {
         Object authUser = rq.getSession().getAttribute("authUser");
+        Object userRole = rq.getSession().getAttribute("userRole");
         if (authUser != null) {
             WebUtil.forward("cabinet", rq, rs);
             return;
         }
-        WebUtil.redirect("/register.jsp", rq, rs);
+        WebUtil.forward("/register.jsp", rq, rs);
     }
 
     @Override
@@ -37,15 +38,15 @@ public class RegisterServlet extends HttpServlet {
         String login = req.getParameter("login");
         String pass = req.getParameter("password");
         String repass = req.getParameter("repassword");
-        String firstName = req.getParameter("firstName");
-        String lastName = req.getParameter("lastName");
-        if (!pass.equals(repass)) {
-            req.setAttribute("error", "Passwords missmatch");
+        String firstName = req.getParameter("firstname");
+        String lastName = req.getParameter("lastname");
+        if (pass.compareTo(repass) != 0) {
+            req.setAttribute("error", "passwords missmatch");
             WebUtil.forward("register", req, resp);
             return;
         }
         if (securityService.login(login, pass) != null ) {
-            req.setAttribute("error", "User already exists");
+            req.setAttribute("error", "user already exists");
             WebUtil.forward("register", req, resp);
             return;
         }
