@@ -52,8 +52,8 @@ public class DefaultCarDao implements CarDao {
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, car.getName());
             ps.setString(2, car.getModel());
-            ps.setString(3, car.getRegNumber());
-            ps.setInt(4, car.getNeedForRepair());
+            ps.setString(3, car.getRegnumber());
+            ps.setInt(4, car.getRepair());
             ps.executeUpdate();
             try (ResultSet keys = ps.getGeneratedKeys()) {
                 keys.next();
@@ -89,16 +89,16 @@ public class DefaultCarDao implements CarDao {
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, car.getName());
             preparedStatement.setString(2, car.getModel());
-            preparedStatement.setString(3, car.getRegNumber());
-            preparedStatement.setInt(4, car.getNeedForRepair());
+            preparedStatement.setString(3, car.getRegnumber());
+            preparedStatement.setInt(4, car.getRepair());
             preparedStatement.setLong(5, car.getId());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
-            log.error("Failed update car No: {}", car.getRegNumber());
+            log.error("Failed update car No: {}", car.getRegnumber());
             throw new RuntimeException();
         }
         flag = 1;
-        log.info("Car No: {} successful updated ", car.getRegNumber());
+        log.info("Car No: {} successful updated ", car.getRegnumber());
         return flag;
         }
 }

@@ -4,19 +4,19 @@ public class Car {
     private Long id;
     private String name;
     private String model;
-    private String regNumber;
-    private int needForRepair;
+    private String regnumber;
+    private int repair;
 
     public Car(){
 
     }
 
-    public Car(Long id, String name, String model, String regNumber, int needForRepair) {
+    public Car(Long id, String name, String model, String regnumber, int repair) {
         this.id = id;
         this.name = name;
         this.model = model;
-        this.regNumber = regNumber;
-        this.needForRepair = needForRepair;
+        this.regnumber = regnumber;
+        this.repair = repair;
     }
 
     public Long id() {
@@ -35,12 +35,13 @@ public class Car {
         return model;
     }
 
-    public String getRegNumber() {
-        return regNumber;
+    public String getRegnumber() {
+        return regnumber;
     }
 
-    public int getNeedForRepair() {
-        return needForRepair;
+
+    public int getRepair() {
+        return repair;
     }
 
     public void setId(Long id) {
@@ -56,11 +57,11 @@ public class Car {
     }
 
     public void setNumber(String regNumber) {
-        this.regNumber = regNumber;
+        this.regnumber = regnumber;
     }
 
     public void setRepair(int needForRepair) {
-        this.needForRepair = needForRepair;
+        this.repair = repair;
     }
 
     @Override
@@ -69,8 +70,8 @@ public class Car {
                 "carId=" + id +
                 ", name='" + name + '\'' +
                 ", model='" + model + '\'' +
-                ", regNumber='" + regNumber + '\'' +
-                ", needForRepair=" + needForRepair +
+                ", regnumber='" + regnumber + '\'' +
+                ", repair=" + repair +
                 '}';
     }
 
@@ -84,10 +85,10 @@ public class Car {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
-        return needForRepair == car.needForRepair &&
+        return repair == car.repair &&
                 id.equals(car.id) &&
                 name.equals(car.name) &&
                 model.equals(car.model) &&
-                regNumber.equals(car.regNumber);
+                regnumber.equals(car.regnumber);
     }
 }

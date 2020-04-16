@@ -5,6 +5,7 @@ import com.github.stinkiex.carpark.model.Car;
 import org.junit.jupiter.api.*;
 import java.util.List;
 
+@DisplayName("CarDao Tests")
 public class DefaultCarDaoTest {
     CarDao carDao = DefaultCarDao.getInstance();
     String name = "LADA";
@@ -29,7 +30,7 @@ public class DefaultCarDaoTest {
         List<Car> list = carDao.getCars();
         Assertions.assertEquals(list.get(list.size()-1).getModel(), model);
         Assertions.assertEquals(list.get(list.size()-1).getName(), name);
-        Assertions.assertEquals(list.get(list.size()-1).getRegNumber(), regnumber);
-        Assertions.assertEquals(list.get(list.size()-1).getNeedForRepair(), needforrepair);
+        Assertions.assertEquals(list.get(list.size()-1).getRegnumber(), regnumber);
+        Assertions.assertEquals(list.get(list.size()-1).getRepair(), needforrepair);
     }
 }

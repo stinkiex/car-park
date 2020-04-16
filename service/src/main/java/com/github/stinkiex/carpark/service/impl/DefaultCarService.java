@@ -5,6 +5,7 @@ import com.github.stinkiex.carpark.dao.impl.DefaultCarDao;
 import com.github.stinkiex.carpark.model.Car;
 import com.github.stinkiex.carpark.service.CarService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DefaultCarService implements CarService {
@@ -35,13 +36,11 @@ public class DefaultCarService implements CarService {
 
     public Long deleteCar(Car car){
         CarDao carDao = DefaultCarDao.getInstance();
-        Long flag = carDao.deleteCar(car.getCarId());
+        Long flag = carDao.deleteCar(car.getId());
         return flag;
     }
 
     public List<Car> getCars() {
         return carDao.getCars();
     }
-
-
 }

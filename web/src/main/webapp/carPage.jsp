@@ -13,18 +13,18 @@
 <table>
     <tr>
         <td>#</td>
-        <td>Марка автомобиля</td>
-        <td>Модель автомобиля</td>
-        <td>Регистрационный номер</td>
-        <td>Исправность</td>
+        <th>Марка автомобиля</th>
+        <th>Модель автомобиля</th>
+        <th>Регистрационный номер</th>
+        <th>Исправность</th>
     </tr>
-    <c:forEach items="${carlist}" var="cars">
+    <c:forEach items="${cars}" var="car">
             <tr>
-                <th> ${cars.id} </th>
-                <th> ${cars.name} </th>
-                <th> ${cars.model} </th>
-                <th> ${cars.regnumber} </th>
-                <th> ${cars.needforrepair} </th>
+                <td> <c:out value="${car.id}"/> </td>
+                <td> <c:out value="${car.name}"/> </td>
+                <td> <c:out value="${car.model}"/> </td>
+                <td> <c:out value="${car.regnumber}"/> </td>
+                <td> <c:out value="${car.repair}"/> </td>
             </tr>
     </c:forEach>
 </table>
