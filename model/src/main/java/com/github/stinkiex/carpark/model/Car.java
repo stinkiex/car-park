@@ -1,7 +1,7 @@
 package com.github.stinkiex.carpark.model;
 
 public class Car {
-    private Long carId;
+    private Long id;
     private String name;
     private String model;
     private String regNumber;
@@ -11,16 +11,20 @@ public class Car {
 
     }
 
-    public Car(Long carId, String name, String model, String regNumber, int needForRepair) {
-        this.carId = carId;
+    public Car(Long id, String name, String model, String regNumber, int needForRepair) {
+        this.id = id;
         this.name = name;
         this.model = model;
         this.regNumber = regNumber;
         this.needForRepair = needForRepair;
     }
 
-    public Long getCarId() {
-        return carId;
+    public Long id() {
+        return id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -39,8 +43,8 @@ public class Car {
         return needForRepair;
     }
 
-    public void setCarId(Long carId) {
-        this.carId = carId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -51,18 +55,18 @@ public class Car {
         this.model = model;
     }
 
-    public void setRegNumber(String regNumber) {
+    public void setNumber(String regNumber) {
         this.regNumber = regNumber;
     }
 
-    public void setNeedForRepair(int needForRepair) {
+    public void setRepair(int needForRepair) {
         this.needForRepair = needForRepair;
     }
 
     @Override
     public String toString() {
         return "Car{" +
-                "carId=" + carId +
+                "carId=" + id +
                 ", name='" + name + '\'' +
                 ", model='" + model + '\'' +
                 ", regNumber='" + regNumber + '\'' +
@@ -81,7 +85,7 @@ public class Car {
         if (o == null || getClass() != o.getClass()) return false;
         Car car = (Car) o;
         return needForRepair == car.needForRepair &&
-                carId.equals(car.carId) &&
+                id.equals(car.id) &&
                 name.equals(car.name) &&
                 model.equals(car.model) &&
                 regNumber.equals(car.regNumber);

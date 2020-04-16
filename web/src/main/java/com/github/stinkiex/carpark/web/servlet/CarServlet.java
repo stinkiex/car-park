@@ -16,17 +16,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "CarServlet", urlPatterns = "/cars")
-public class CarsServlet extends HttpServlet {
+@WebServlet(name = "CarServlet", urlPatterns = "/carPage")
+public class CarServlet extends HttpServlet {
 
     private static final Logger log = LoggerFactory.getLogger(Car.class);
     private CarService carService = DefaultCarService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Car> carlist = carService.getCars();
-        req.setAttribute("carlist", carlist);
-        WebUtil.forward("cars", req, resp);
+        List<Car> cars = carService.getCars();
+        req.setAttribute("cars", cars);
+        WebUtil.forward("carPage", req, resp);
     }
 
     @Override

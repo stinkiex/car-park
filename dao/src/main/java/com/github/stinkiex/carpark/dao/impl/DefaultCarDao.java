@@ -45,8 +45,6 @@ public class DefaultCarDao implements CarDao {
         }
     }
 
-
-
     @Override
     public Long save(Car car) {
         final String sql = "INSERT INTO car(name, model, regnumber, needforrepair) VALUES(?,?,?,?)";
@@ -93,7 +91,7 @@ public class DefaultCarDao implements CarDao {
             preparedStatement.setString(2, car.getModel());
             preparedStatement.setString(3, car.getRegNumber());
             preparedStatement.setInt(4, car.getNeedForRepair());
-            preparedStatement.setLong(5, car.getCarId());
+            preparedStatement.setLong(5, car.getId());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
             log.error("Failed update car No: {}", car.getRegNumber());

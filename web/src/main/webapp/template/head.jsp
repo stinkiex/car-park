@@ -8,16 +8,19 @@
 <body>
 <table>
     <tr>
-        <td style="width: 25%; text-align: center;">
-            <a href="${pageContext.request.contextPath}/cars">СПИСОК МАШИН</a>
+        <td style="width: 20%; text-align: center;">
+            <a href="${pageContext.request.contextPath}/carPage">СПИСОК МАШИН</a>
         </td>
-        <td style="width: 25%; text-align: center;">
+        <td style="width: 20%; text-align: center;">
             <a href="${pageContext.request.contextPath}/cargo"> ПЕРЕВОЗКИ</a>
         </td>
-        <td style="width: 25%; text-align: center;">
-            <a href="${pageContext.request.contextPath}/repairrequest.jsp">ЗАЯВКИ НА РЕМОНТ</a>
+        <td style="width: 20%; text-align: center;">
+            <a href="${pageContext.request.contextPath}/adduser">ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ</a>
         </td>
-        <td style="width: 25%; text-align: center;">
+        <td style="width: 20%; text-align: center;">
+            <a href="${pageContext.request.contextPath}/repairRequest">ЗАЯВКИ НА РЕМОНТ</a>
+        </td>
+        <td style="width: 20%; text-align: center;">
             <a href="${pageContext.request.contextPath}/logout">ВЫЙТИ</a>
         </td>
     </tr>

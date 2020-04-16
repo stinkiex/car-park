@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         log.info("user {} logged", user.getLogin());
-        rq.getSession().setAttribute("authUser", user);
+        rq.getSession().setAttribute("authUser", user.getLogin());
         rq.getSession().setAttribute("userRole", user.getRole());
         rq.getSession().setMaxInactiveInterval(3600);
         WebUtil.redirect("/mainPage", rq, rs);

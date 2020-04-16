@@ -9,7 +9,7 @@
 <body>
 <jsp:include page="template/head.jsp"/>
 <h3>Список машин</h3>
-<c:if test="${carlist != null}">
+<c:if test="${cars != null}">
 <table>
     <tr>
         <td>#</td>
@@ -20,16 +20,14 @@
     </tr>
     <c:forEach items="${carlist}" var="cars">
             <tr>
-                <td>${cars.id}</td>
-                <td>${cars.name}</td>
-                <td>${cars.model}</td>
-                <td>${cars.regnumber}</td>
-                <td>${cars.needforrepair}</td>
+                <th> ${cars.id} </th>
+                <th> ${cars.name} </th>
+                <th> ${cars.model} </th>
+                <th> ${cars.regnumber} </th>
+                <th> ${cars.needforrepair} </th>
             </tr>
     </c:forEach>
 </table>
 </c:if>
-
-<%= request.getAttribute("cars")%>
 </body>
 </html>
