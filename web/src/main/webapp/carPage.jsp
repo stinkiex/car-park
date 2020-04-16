@@ -16,7 +16,7 @@
         <th>Марка автомобиля</th>
         <th>Модель автомобиля</th>
         <th>Регистрационный номер</th>
-        <th>Исправность</th>
+        <th>EDIT</th>
     </tr>
     <c:forEach items="${cars}" var="car">
             <tr>
@@ -24,7 +24,7 @@
                 <td align="center"> <c:out value="${car.name}"/> </td>
                 <td align="center"> <c:out value="${car.model}"/> </td>
                 <td align="center"> <c:out value="${car.regnumber}"/> </td>
-                <td align="center"> <c:out value="${car.repair}"/> </td>
+                <td> <center> EDIT </center> </td>
             </tr>
     </c:forEach>
 </table>
