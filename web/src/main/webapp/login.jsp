@@ -12,13 +12,11 @@
 <form action="${pageContext.request.contextPath}/login" method="post">
     <legend>Sign in:</legend>
     <label for="login">login</label>
-    <input id="login" type="text" name="login"> <br/>
+<input id="login" type="text" name="login"> <br/>
 
-    <label for="password">password</label>
-    <input id="password" type="password" name="password"><br/>
-    <input type="submit"></form><br/>
-
-    <small><a href="register.jsp">Зарегистрироваться</a> </small>
+<label for="password">password</label>
+<input id="password" type="password" name="password"><br/>
+<input type="submit"></form><br/>
 </form>
 
 <p style="color: red">${error}</p>

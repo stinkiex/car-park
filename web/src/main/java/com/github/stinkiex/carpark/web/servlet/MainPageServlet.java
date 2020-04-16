@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "Cabinet Servlet", urlPatterns = "/cabinet")
-public class CabinetServlet extends HttpServlet {
+@WebServlet(name = "Cabinet Servlet", urlPatterns = "/mainPage")
+public class MainPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        WebUtil.forward("cabinet", req, resp);
+        WebUtil.forward("mainPage", req, resp);
     }
 }

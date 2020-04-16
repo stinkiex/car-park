@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
             WebUtil.forward("login", rq, rs);
             return;
         }
-        WebUtil.redirect("cabinet", rq, rs);
+        WebUtil.redirect("mainPage", rq, rs);
     }
 
     @Override
@@ -43,6 +43,6 @@ public class LoginServlet extends HttpServlet {
         rq.getSession().setAttribute("authUser", user);
         rq.getSession().setAttribute("userRole", user.getRole());
         rq.getSession().setMaxInactiveInterval(3600);
-        WebUtil.redirect("/cabinet", rq, rs);
+        WebUtil.redirect("/mainPage", rq, rs);
     }
 }

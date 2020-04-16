@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "RegisterServlet", urlPatterns = "/register")
-public class RegisterServlet extends HttpServlet {
+@WebServlet(name = "AdduserServlet", urlPatterns = "/adduser")
+public class AddUserServlet extends HttpServlet {
 
-    private static final Logger log = LoggerFactory.getLogger(RegisterServlet.class);
+    private static final Logger log = LoggerFactory.getLogger(AddUserServlet.class);
 
     SecurityService securityService = DefaultSecurityService.getInstance();
 
@@ -27,10 +27,10 @@ public class RegisterServlet extends HttpServlet {
         Object authUser = rq.getSession().getAttribute("authUser");
         Object userRole = rq.getSession().getAttribute("userRole");
         if (authUser != null) {
-            WebUtil.forward("cabinet", rq, rs);
+            WebUtil.forward("mainPage", rq, rs);
             return;
         }
-        WebUtil.forward("/register.jsp", rq, rs);
+        WebUtil.forward("/addUser", rq, rs);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class RegisterServlet extends HttpServlet {
         }
         log.info("user {} registered", login);
         req.getSession().setAttribute("authUser", login);
-        WebUtil.redirect("/cabinet", req, resp);//todo Запилить валидацию полей
+        req.getSession().setAttribute("userRole", "DRIVER");
+        req.getSession().setMaxInactiveInterval(3600);
+        WebUtil.redirect("/mainPage", req, resp);//todo Запилить валидацию полей
     }
-
-
 }

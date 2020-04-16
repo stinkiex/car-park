@@ -17,7 +17,9 @@ ${checkFields}
     </c:forEach>
 </c:if>
 <center>
-    <form action="${pageContext.request.contextPath}/register" method="post">
+    <form action="${pageContext.request.contextPath}/adduser" method="post">
+
+        <h3>Добавить пользователя</h3>
 
         <label for="login">login</label>
         <input id="login" type="text" name="login"> <br/>
