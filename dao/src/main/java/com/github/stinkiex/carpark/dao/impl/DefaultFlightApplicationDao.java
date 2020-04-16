@@ -3,6 +3,8 @@ package com.github.stinkiex.carpark.dao.impl;
 import com.github.stinkiex.carpark.dao.DataSource;
 import com.github.stinkiex.carpark.dao.FlightApplicationDao;
 import com.github.stinkiex.carpark.model.FlightApplication;
+import com.github.stinkiex.carpark.model.FlightStatus;
+import com.github.stinkiex.carpark.model.RepairStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,15 +33,14 @@ public class DefaultFlightApplicationDao implements FlightApplicationDao {
             final List<FlightApplication> result = new ArrayList<>();
             while (resultSet.next()) {
                 final FlightApplication flightApplication = new FlightApplication(
-                        resultSet.getInt("id"),
-                        resultSet.getString("datebegin"),
-                        resultSet.getString("dateexp"),
+                        resultSet.getLong("id"),
+                        resultSet.getString("driver"),
+                        resultSet.getString("car"),
+                        resultSet.getDate("datebegin"),
+                        resultSet.getDate("dateexp"),
                         resultSet.getString("cargo"),
                         resultSet.getInt("weight"),
-                        resultSet.getString("flightstatus"),
-                        resultSet.getString("car"),
-                        resultSet.getString("driver")
-                );
+                        resultSet.getString("flightstatus"));
                 result.add(flightApplication);
             }
             return result;
@@ -55,11 +56,11 @@ public class DefaultFlightApplicationDao implements FlightApplicationDao {
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, flightApplication.getDriver());
             ps.setString(2, flightApplication.getCar());
-            ps.setString(3, flightApplication.getDateBeg());
-            ps.setString(4, flightApplication.getDateExp());
+            ps.setDate(3, flightApplication.getDatebeg());
+            ps.setDate(4, flightApplication.getDateexp());
             ps.setString(5, flightApplication.getCargo());
             ps.setInt(6, flightApplication.getWeight());
-            ps.setString(7, flightApplication.getFlightStatus());
+            ps.setString(7, flightApplication.getStatus());
             ps.executeUpdate();
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 return generatedKeys.getLong(1);
@@ -78,11 +79,11 @@ public class DefaultFlightApplicationDao implements FlightApplicationDao {
              PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, flightApplication.getDriver());
             ps.setString(2, flightApplication.getCar());
-            ps.setString(3, flightApplication.getDateBeg());
-            ps.setString(4, flightApplication.getDateExp());
+            ps.setDate(3, flightApplication.getDatebeg());
+            ps.setDate(4, flightApplication.getDateexp());
             ps.setString(5, flightApplication.getCargo());
             ps.setInt(6, flightApplication.getWeight());
-            ps.setString(7, flightApplication.getFlightStatus());
+            ps.setString(7, String.valueOf(flightApplication.getStatus()));
             ps.executeUpdate();
         }catch (SQLException e){
             log.error("Failed update рейс номер: {}", flightApplication.toString());

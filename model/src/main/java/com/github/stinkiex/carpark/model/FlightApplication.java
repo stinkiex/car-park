@@ -1,23 +1,25 @@
 // Заявка на рейс
 package com.github.stinkiex.carpark.model;
 
+import java.sql.Date;
+
 public class FlightApplication {
     private long id;
-    private String dateBeg;
-    private String dateExp;
+    private Date datebeg;
+    private Date dateexp;
     private String cargo;
     private int weight;
-    private String flightStatus;
+    private String status;
     private String car;
     private String driver;
 
-    public FlightApplication(long id, String dateBeg, String dateExp, String cargo, int weight, String flightStatus, String car, String driver) {
+    public FlightApplication(Long id, String car, String driver, Date datebeg, Date dateexp, String cargo, int weight, String status) {
         this.id = id;
-        this.dateBeg = dateBeg;
-        this.dateExp = dateExp;
+        this.datebeg = datebeg;
+        this.dateexp = dateexp;
         this.cargo = cargo;
         this.weight = weight;
-        this.flightStatus = flightStatus;
+        this.status = status;
         this.car = car;
         this.driver = driver;
     }
@@ -26,77 +28,63 @@ public class FlightApplication {
         return id;
     }
 
-    public String getDriver() {
-        return driver;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getDateBeg() {
-        return dateBeg;
+    public Date getDatebeg() {
+        return datebeg;
     }
 
-    public String getDateExp() {
-        return dateExp;
+    public void setDatebeg(Date datebeg) {
+        this.datebeg = datebeg;
+    }
+
+    public Date getDateexp() {
+        return dateexp;
+    }
+
+    public void setDateexp(Date dateexp) {
+        this.dateexp = dateexp;
     }
 
     public String getCargo() {
         return cargo;
     }
 
-    public int getWeight() {
-        return weight;
-    }
-
-    public String getFlightStatus() {
-        return flightStatus;
-    }
-
-    public String getCar() {
-        return car;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setDateBeg(String dateBeg) {
-        this.dateBeg = dateBeg;
-    }
-
-    public void setDateExp(String dateExp) {
-        this.dateExp = dateExp;
-    }
-
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 
     public void setWeight(int weight) {
         this.weight = weight;
     }
 
-    public void setFlightStatus(String flightStatus) {
-        this.flightStatus = flightStatus;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCar() {
+        return car;
     }
 
     public void setCar(String car) {
         this.car = car;
     }
 
-    public void setDriver(String driver) {
-        this.driver = driver;
+    public String getDriver() {
+        return driver;
     }
 
-    @Override
-    public String toString() {
-        return "FlightApplication{" +
-                "id=" + id +
-                ", dateBeg='" + dateBeg + '\'' +
-                ", dateExp='" + dateExp + '\'' +
-                ", cargo='" + cargo + '\'' +
-                ", weight=" + weight +
-                ", flightStatus='" + flightStatus + '\'' +
-                ", car='" + car + '\'' +
-                ", driver='" + driver + '\'' +
-                '}';
+    public void setDriver(String driver) {
+        this.driver = driver;
     }
 }

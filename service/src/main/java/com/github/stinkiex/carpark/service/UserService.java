@@ -10,6 +10,4 @@ public interface UserService {
     List<User> getMembers();
 
     Long saveMember(User user);
-
-    void saveAuthUser(AuthUser authUser);
 }

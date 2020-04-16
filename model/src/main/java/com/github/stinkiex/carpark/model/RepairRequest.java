@@ -2,51 +2,71 @@ package com.github.stinkiex.carpark.model;
 
 public class RepairRequest {
     private long id;
-    private String carName;
-    private String carNumber;
-    private String repairReason;
-    private RepairStatus repairStatus;
+    private String name;
+    private String number;
+    private String reason;
+    private String status;
 
-    public RepairRequest(long id, String carName, String carNumber, String repairReason, RepairStatus repairStatus) {
+    public RepairRequest(Long id, String name, String number, String reason, String status) {
         this.id = id;
-        this.carName = carName;
-        this.carNumber = carNumber;
-        this.repairReason = repairReason;
-        this.repairStatus = repairStatus;
+        this.name = name;
+        this.number = number;
+        this.reason = reason;
+        this.status = status;
+    }
+
+    public RepairRequest(){
+
     }
 
     public long getId() {
         return id;
     }
 
-    public String getCarName() {
-        return carName;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getCarNumber() {
-        return carNumber;
+    public String getName() {
+        return name;
     }
 
-    public String getRepairReason() {
-        return repairReason;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public RepairStatus getRepairStatus() {
-        return repairStatus;
+    public String getNumber() {
+        return number;
     }
 
-    public void setRepairStatus(RepairStatus repairStatus) {
-        this.repairStatus = repairStatus;
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
     public String toString() {
         return "RepairRequest{" +
                 "id=" + id +
-                ", carName='" + carName + '\'' +
-                ", carNumber='" + carNumber + '\'' +
-                ", repairReason='" + repairReason + '\'' +
-                ", repairStatus=" + repairStatus +
+                ", name='" + name + '\'' +
+                ", number='" + number + '\'' +
+                ", reason='" + reason + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 }

@@ -12,13 +12,13 @@
             <a href="${pageContext.request.contextPath}/carPage">СПИСОК МАШИН</a>
         </td>
         <td style="width: 20%; text-align: center;">
-            <a href="${pageContext.request.contextPath}/cargo"> ПЕРЕВОЗКИ</a>
+            <a href="${pageContext.request.contextPath}/cargoPage"> ПЕРЕВОЗКИ</a>
         </td>
         <td style="width: 20%; text-align: center;">
             <a href="${pageContext.request.contextPath}/adduser">ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ</a>
         </td>
         <td style="width: 20%; text-align: center;">
-            <a href="${pageContext.request.contextPath}/repairRequest">ЗАЯВКИ НА РЕМОНТ</a>
+            <a href="${pageContext.request.contextPath}/repairPage">ЗАЯВКИ НА РЕМОНТ</a>
         </td>
         <td style="width: 20%; text-align: center;">
             <a href="${pageContext.request.contextPath}/logout">ВЫЙТИ</a>

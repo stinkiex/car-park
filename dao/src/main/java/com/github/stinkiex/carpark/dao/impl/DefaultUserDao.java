@@ -65,22 +65,6 @@ public class DefaultUserDao implements UserDao {
         return result;
     }
 
-    public static void main(String[] args) {
-        UserDao userDao = new DefaultUserDao();
-        String fname = "Тестовое Имя";
-        String lname = "Тестовая фамилия";
-        userDao.save(new User(null, "fname", "lname", "+375114567890"));
-        System.out.println(userDao.idByFirstNameAndlastName(fname, lname));
-    }
-
-
-
-    /*
-    Комментарий
-     */
-
-
-
     @Override
     public List<User> getMembers() {
         try (Connection connection = DataSource.getInstance().getConnection();

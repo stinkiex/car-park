@@ -8,15 +8,17 @@
 </head>
 <body>
 <h3>Доьавить заявку на ремонт</h3>
-<form action="${pageContext.request.contextPath}/addrepair" method="post">
-    <label for="carname">Марка автомобиля</label>
-    <input id="carname" type="text" name="carname"><br/>
+<form action="${pageContext.request.contextPath}/../addrepairrequest" method="post">
 
-    <label for="carmodel">Модель автомобиля</label>
-    <input id="carmodel" type="text" name="carmodel"><br/>
+    <label for="name">Марка автомобиля</label>
+    <input id="name" type="text" name="name"><br/>
 
-    <label for="regnumb">Регистрационный номер</label>
-    <input id="regnumb" type="text" name="regnumb"><br/>
+    <label for="regnumber">гос.номер</label>
+    <input id="regnumber" type="text" name="regnumber"><br/>
+
+    <label for="reason">Описание поломки</label>
+    <input id="reason" type="textarea" name="reason"><br/>
+
     <input type="submit">
 </form>
 <p style="color: red">${error}</p>

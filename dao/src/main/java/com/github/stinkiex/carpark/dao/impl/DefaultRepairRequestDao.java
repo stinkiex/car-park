@@ -28,9 +28,9 @@ public class DefaultRepairRequestDao implements RepairRequestDao {
         String sql = "insert into repair_request(car_name, reg_number, reason, status) values(?, ?, ?, ?)";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, repairRequest.getCarName());
-            preparedStatement.setString(2, repairRequest.getCarNumber());
-            preparedStatement.setString(3, repairRequest.getRepairReason());
+            preparedStatement.setString(1, repairRequest.getName());
+            preparedStatement.setString(2, repairRequest.getNumber());
+            preparedStatement.setString(3, repairRequest.getReason());
             preparedStatement.setString(4, String.valueOf(RepairStatus.SENT));
             preparedStatement.executeUpdate();
             try (ResultSet keys = preparedStatement.getGeneratedKeys()) {
@@ -39,7 +39,7 @@ public class DefaultRepairRequestDao implements RepairRequestDao {
                 return keys.getLong(1);
             }
         } catch (SQLException e) {
-            log.error("fail to add Repair request for :{}", repairRequest.getCarName(), e);
+            log.error("fail to add Repair request for :{}", repairRequest.getName(), e);
             throw new RuntimeException(e);
         }
     }
@@ -48,7 +48,7 @@ public class DefaultRepairRequestDao implements RepairRequestDao {
     public List<RepairRequest> getList() {
         RepairStatus repairStatus = null;
         try (Connection connection = DataSource.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from user");
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from repair_request");
              ResultSet resultSet = preparedStatement.executeQuery()){
             final List<RepairRequest> result = new ArrayList<>();
             while(resultSet.next()){
@@ -57,7 +57,7 @@ public class DefaultRepairRequestDao implements RepairRequestDao {
                         resultSet.getString("car_name"),
                         resultSet.getString("reg_number"),
                         resultSet.getString("reason"),
-                        repairStatus.valueOf(resultSet.getString("status"))
+                        resultSet.getString("status")
                 );
                 result.add(repairRequest);
             }
@@ -65,16 +65,14 @@ public class DefaultRepairRequestDao implements RepairRequestDao {
             return result;
         } catch (SQLException e){
             log.error("Users not found {}");
-            throw new RuntimeException();
+            throw new RuntimeException(e);
         }
     }
-
-
 
     @Override
     public long delete(RepairRequest repairRequest) {
         long flag = 0;
-        String sql = "DELETE FROM user WHERE id = ?";
+        String sql = "DELETE FROM repair_request WHERE id = ?";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setLong(1, repairRequest.getId());
@@ -94,9 +92,9 @@ public class DefaultRepairRequestDao implements RepairRequestDao {
         String sql = "UPDATE repair_request SET car_name = ?, reg_number = ?, reason = ?, status = ? WHERE id = ?";
         try (Connection connection = DataSource.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-            preparedStatement.setString(1, repairRequest.getCarName());
-            preparedStatement.setString(2, repairRequest.getCarNumber());
-            preparedStatement.setString(3, repairRequest.getRepairReason());
+            preparedStatement.setString(1, repairRequest.getName());
+            preparedStatement.setString(2, repairRequest.getNumber());
+            preparedStatement.setString(3, repairRequest.getReason());
             preparedStatement.setString(4, String.valueOf(RepairStatus.SENT));
             preparedStatement.setLong(5, repairRequest.getId());
             preparedStatement.executeUpdate(sql);
