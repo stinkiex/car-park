@@ -46,10 +46,10 @@ public class DefaultRepairRequestDao implements RepairRequestDao {
 
     @Override
     public List<RepairRequest> getList() {
-        RepairStatus repairStatus = null;
+        String sql = "select * from repair_request";
         try (Connection connection = DataSource.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from repair_request");
-             ResultSet resultSet = preparedStatement.executeQuery()){
+             PreparedStatement preparedStatement = connection.prepareStatement(sql);
+             ResultSet resultSet = preparedStatement.executeQuery(sql)){
             final List<RepairRequest> result = new ArrayList<>();
             while(resultSet.next()){
                 final RepairRequest repairRequest = new RepairRequest(

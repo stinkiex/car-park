@@ -63,6 +63,7 @@ public class DefaultFlightApplicationDao implements FlightApplicationDao {
             ps.setString(7, flightApplication.getStatus());
             ps.executeUpdate();
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+                generatedKeys.next();
                 return generatedKeys.getLong(1);
             }
         } catch (SQLException e) {

@@ -43,12 +43,6 @@ public class DefaultAuthUserDao implements AuthUserDao {
         }
     }
 
-//    public static void main(String[] args) {
-//        AuthUser authUser = new AuthUser(null, "login3", "pass", Role.DRIVER, 5L);
-//        long val = DefaultAuthUserDao.getInstance().saveAuthUser(authUser);
-//        System.out.println(val);
-//    }
-
     public long saveAuthUser(AuthUser user) {
         final String sql = "insert into auth_user(login, password, role, userid) values(?,?,?,?)";
         try (Connection connection = DataSource.getInstance().getConnection();

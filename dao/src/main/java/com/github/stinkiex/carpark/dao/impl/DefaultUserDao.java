@@ -88,8 +88,6 @@ public class DefaultUserDao implements UserDao {
         }
     }
 
-
-
     @Override
     public long deleteUser(User user) {
         long flag = 0;

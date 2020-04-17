@@ -4,7 +4,7 @@ package com.github.stinkiex.carpark.model;
 import java.sql.Date;
 
 public class FlightApplication {
-    private long id;
+    private Long id;
     private Date datebeg;
     private Date dateexp;
     private String cargo;
@@ -28,7 +28,7 @@ public class FlightApplication {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
