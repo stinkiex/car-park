@@ -1,17 +1,18 @@
-package com.github.stinkiex.carpark.web;
+package com.github.stinkiex.carpark.web.servlet;
+
+import com.github.stinkiex.carpark.model.AuthUser;
+import com.github.stinkiex.carpark.service.SecurityService;
+import com.github.stinkiex.carpark.service.impl.DefaultSecurityService;
+import com.github.stinkiex.carpark.web.WebUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.github.stinkiex.carpark.model.AuthUser;
-import com.github.stinkiex.carpark.service.SecurityService;
-import com.github.stinkiex.carpark.service.impl.DefaultSecurityService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-@WebServlet("/login")
+@WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 
     private static final Logger log = LoggerFactory.getLogger(LoginServlet.class);
@@ -20,11 +21,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest rq, HttpServletResponse rs) {
         Object authUser = rq.getSession().getAttribute("authUser");
+        Object userRole = rq.getSession().getAttribute("userRole");
         if (authUser == null) {
             WebUtil.forward("login", rq, rs);
             return;
         }
-        WebUtil.redirect("/student", rq, rs);
+        WebUtil.redirect("mainPage", rq, rs);
     }
 
     @Override
@@ -38,7 +40,9 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         log.info("user {} logged", user.getLogin());
-        rq.getSession().setAttribute("authUser", user);
-        WebUtil.redirect("/student", rq, rs);
+        rq.getSession().setAttribute("authUser", user.getLogin());
+        rq.getSession().setAttribute("userRole", user.getRole());
+        rq.getSession().setMaxInactiveInterval(3600);
+        WebUtil.redirect("/mainPage", rq, rs);
     }
 }

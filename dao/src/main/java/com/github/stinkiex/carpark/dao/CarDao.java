@@ -8,4 +8,8 @@ public interface CarDao {
     List<Car> getCars();
 
     Long save(Car car);
+
+    long deleteCar(Long id);
+
+    long updateCar(Car car);
 }

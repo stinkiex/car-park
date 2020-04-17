@@ -9,5 +9,9 @@ public interface FlightApplicationDao {
 
     Long save(FlightApplication flightApplication);
 
+    long update(FlightApplication flightApplication);
+
+    long delete(FlightApplication flightApplication);
+
 
 }

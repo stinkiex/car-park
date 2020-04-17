@@ -4,19 +4,20 @@ public class AuthUser {
     private String login;
     private String password;
     private Role role;
-    private String userId;
+    private Long userId;
     private Long id;
 
-    public Long getId() {
-        return id;
-    }
 
-    public AuthUser(Long id, String login, String password, Role role, String userId) {
-        this.id= id;
+    public AuthUser(Long id, String login, String password, Role role, Long userId) {
+        this.id = id;
         this.login = login;
         this.password = password;
         this.role = role;
         this.userId = userId;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getLogin() {
@@ -31,7 +32,18 @@ public class AuthUser {
         return role;
     }
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
+    }
+
+    @Override
+    public String toString() {
+        return "AuthUser{" +
+                "login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", userId=" + userId +
+                ", id=" + id +
+                '}';
     }
 }

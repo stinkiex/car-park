@@ -1,23 +1,25 @@
 // Заявка на рейс
 package com.github.stinkiex.carpark.model;
 
-public class FlightApplication {
-    private long id;
-    private String dateBeg;
-    private String dateExp;
-    private String cargo;
-    private double weight;
-    private String flightStatus;
-    private String car;  //Todo связать с машинами;
-    private String driver; //Todo connect with users
+import java.sql.Date;
 
-    public FlightApplication(long id, String dateBeg, String dateExp, String cargo, double weight, String flightStatus, String car) {
+public class FlightApplication {
+    private Long id;
+    private Date datebeg;
+    private Date dateexp;
+    private String cargo;
+    private int weight;
+    private String status;
+    private String car;
+    private String driver;
+
+    public FlightApplication(Long id, String car, String driver, Date datebeg, Date dateexp, String cargo, int weight, String status) {
         this.id = id;
-        this.dateBeg = dateBeg;
-        this.dateExp = dateExp;
+        this.datebeg = datebeg;
+        this.dateexp = dateexp;
         this.cargo = cargo;
         this.weight = weight;
-        this.flightStatus = flightStatus;
+        this.status = status;
         this.car = car;
         this.driver = driver;
     }
@@ -26,31 +28,63 @@ public class FlightApplication {
         return id;
     }
 
-    public String getDriver() {
-        return driver;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getDateBeg() {
-        return dateBeg;
+    public Date getDatebeg() {
+        return datebeg;
     }
 
-    public String getDateExp() {
-        return dateExp;
+    public void setDatebeg(Date datebeg) {
+        this.datebeg = datebeg;
+    }
+
+    public Date getDateexp() {
+        return dateexp;
+    }
+
+    public void setDateexp(Date dateexp) {
+        this.dateexp = dateexp;
     }
 
     public String getCargo() {
         return cargo;
     }
 
-    public double getWeight() {
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    public int getWeight() {
         return weight;
     }
 
-    public String getFlightStatus() {
-        return flightStatus;
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCar() {
         return car;
+    }
+
+    public void setCar(String car) {
+        this.car = car;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public void setDriver(String driver) {
+        this.driver = driver;
     }
 }

@@ -1,7 +1,4 @@
 package com.github.stinkiex.carpark.service.impl;
-
-
-
 import com.github.stinkiex.carpark.dao.UserDao;
 import com.github.stinkiex.carpark.dao.impl.DefaultUserDao;
 import com.github.stinkiex.carpark.model.AuthUser;
@@ -29,19 +26,13 @@ public class DefaultUserService implements UserService {
         return localInstance;
     }
 
-    @Override
+
     public List<User> getMembers() {
         return userDao.getMembers();
     }
 
-    @Override
+
     public Long saveMember(User user) {
         return userDao.save(user);
     }
-
-    @Override
-    public void saveAuthUser(AuthUser authUser) {
-
-    }
-
 }
