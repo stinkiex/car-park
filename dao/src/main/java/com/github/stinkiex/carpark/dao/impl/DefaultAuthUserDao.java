@@ -60,7 +60,7 @@ public class DefaultAuthUserDao implements AuthUserDao {
         } catch (SQLException e) {
             log.error("Failed creat user: {}", user);
             throw new RuntimeException(e);
-        }//todo Разобраться с синзронным (User + Auth) созданием
+        }
     }
 
     @Override
