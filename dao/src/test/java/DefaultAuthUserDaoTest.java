@@ -14,8 +14,6 @@ import java.sql.Statement;
 public class DefaultAuthUserDaoTest {
 final AuthUserDao defaultAuthUserDao = DefaultAuthUserDao.getInstance();
 
-AuthUserDao authUserDao = DefaultAuthUserDao.getInstance();
-
 @Test
  public void saveAuthUser(){
 
@@ -35,8 +33,8 @@ public void deleteAuthUser() {
  public void checkExistUser(){
  String login = "testUser";
  String pass = "testPass";
- authUserDao.saveAuthUser(new AuthUser(null, login, pass, Role.BLOCKED, null));
- Assertions.assertEquals(authUserDao.checkExistUser(login), 1);
+ defaultAuthUserDao.saveAuthUser(new AuthUser(null, login, pass, Role.BLOCKED, null));
+ Assertions.assertEquals(defaultAuthUserDao.checkExistUser(login), 1);
  }
 
 }

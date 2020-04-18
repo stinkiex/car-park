@@ -57,9 +57,11 @@ public class DefaultCarDao implements CarDao {
             ps.executeUpdate();
             try (ResultSet keys = ps.getGeneratedKeys()) {
                 keys.next();
+                log.info("Car {} {} {} added succesful", car.getName(), car.getModel(), car.getRegnumber());
                 return keys.getLong(1);
             }
         } catch (SQLException e) {
+            log.error("Fail to creat car {} {} {} {}:", car.getName(), car.getModel(), car.getRegnumber(), e);
             throw new RuntimeException(e);
         }
     }
@@ -74,7 +76,7 @@ public class DefaultCarDao implements CarDao {
             preparedStatement.executeUpdate();
             log.info("Car No: {} deleted", id);
         }catch (SQLException e){
-            log.error("Fail to delete car No.:{}", id, e);
+            log.error("Fail to delete car No.:{}, {}", id, e);
             throw new RuntimeException();
         }
         flag = 1;
@@ -94,7 +96,7 @@ public class DefaultCarDao implements CarDao {
             preparedStatement.setLong(5, car.getId());
             preparedStatement.executeUpdate();
         }catch (SQLException e){
-            log.error("Failed update car No: {}", car.getRegnumber());
+            log.error("Failed update car No: {} : {}", car.getRegnumber(), e);
             throw new RuntimeException();
         }
         flag = 1;
