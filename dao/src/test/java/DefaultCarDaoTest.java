@@ -2,6 +2,7 @@ import com.github.stinkiex.carpark.dao.CarDao;
 import com.github.stinkiex.carpark.dao.DataSource;
 import com.github.stinkiex.carpark.dao.impl.DefaultCarDao;
 import com.github.stinkiex.carpark.model.Car;
+import org.junit.Assert;
 import org.junit.jupiter.api.*;
 import java.util.List;
 
@@ -32,5 +33,22 @@ public class DefaultCarDaoTest {
         Assertions.assertEquals(list.get(list.size()-1).getName(), name);
         Assertions.assertEquals(list.get(list.size()-1).getRegnumber(), regnumber);
         Assertions.assertEquals(list.get(list.size()-1).getRepair(), needforrepair);
+    }
+
+    @Test
+    void updateCar(){
+        String name = "Жигули";
+        String model = "копейка";
+        String regnumber = "ТТ0010-7";
+        carDao.save(new Car(null, name, model, regnumber, needforrepair));
+        List<Car> list = carDao.getCars();
+        long id = list.get(list.size()-1).getId();
+        Car upCar = new Car(id, name, model, regnumber, 1);
+        carDao.updateCar(upCar);
+        List<Car> updatedList = carDao.getCars();
+        Assertions.assertEquals(updatedList.get(updatedList.size()-1).getModel(), model);
+        Assertions.assertEquals(updatedList.get(updatedList.size()-1).getName(), name);
+        Assertions.assertEquals(updatedList.get(updatedList.size()-1).getRegnumber(), regnumber);
+        Assertions.assertEquals(updatedList.get(updatedList.size()-1).getId(), id);
     }
 }
